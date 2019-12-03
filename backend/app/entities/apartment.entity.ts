@@ -15,7 +15,7 @@ export class Apartment {
     @Column({type: 'text', nullable: true })
     public description: string;
 
-    @OneToMany(type => Consumption, consumptions => consumptions.apartment)
+    @OneToMany(type => Consumption, consumption => consumption.apartment)
     public consumptions: Consumption[];
 
 

@@ -2,7 +2,7 @@ import { EntityRepository, AbstractRepository } from "typeorm";
 import { Apartment } from "../entities/apartment.entity";
 
 @EntityRepository(Apartment)
-export class AreaRepository extends AbstractRepository<Apartment> {
+export class ApartmentRepository extends AbstractRepository<Apartment> {
 
     public async create(apartment: Apartment): Promise<void> {
         await this.repository.save(apartment);
