@@ -9,7 +9,8 @@
 // pin SCA x RTC  D2 --> GPIO4
 */
 //LIBRERIE
-#include <ESP8266WiFi.h>
+#include <WiFi.h>
+#include "esp_wpa2.h" //wpa2 library for connections to Enterprise networks
 #include <PubSubClient.h>
 #include <EEPROM.h>
 //#include <NTPClient.h>
@@ -111,13 +112,15 @@ void sendNTPpacket(IPAddress &address){// send an NTP request to the time server
 }
 
 //PARAMETRI WIFI
-const char* ssid = "MARCANTOGNINI";  //"iPhoneX di Matteo" - "MARCANTOGNINI"
-const char* password = "1234567890";
+const char* ssid = "IoTeam Enterprise";  //"iPhoneX di Matteo" - "MARCANTOGNINI"
+const char* username = "username";
+const char* password = "password";
 WiFiClient espClient1;
 //WiFiClient espClient2;
 
 //PARAMETRI MQTT
-const char* mqtt_server1 = "lab.iismerlonimiliani.it";
+                                                          // MQTT broker UNICAM: 90.147.42.37
+const char* mqtt_server1 = "192.168.1.13";    // MQTT broker ITIS Fabriano: lab.iismerlonimiliani.it
 //const char* mqtt_server1 = "192.168.0.148";
 PubSubClient client(espClient1);
 //PubSubClient client(espClient2);
@@ -146,16 +149,16 @@ int LED     = 16; // Pin D0 - LED
 //VARIABILI DI CONTEGGIO PULSAZIONI
 unsigned long t1_1;   //time of pulse now
 unsigned long t1_0;   //previous time
-unsigned long T1;     // duration 
+unsigned long Tt1;     // duration 
 unsigned long t2_1;   //time of pulse now
 unsigned long t2_0;   //previous time
-unsigned long T2;     // duration
+unsigned long Tt2;     // duration
 unsigned long t3_1;   //time of pulse now
 unsigned long t3_0;   //previous time
-unsigned long T3;     // duration 
+unsigned long Tt3;     // duration 
 unsigned long t4_1;   //time of pulse now
 unsigned long t4_0;   //previous time
-unsigned long T4;     // duration 
+unsigned long Tt4;     // duration 
 
 //long previousMillis = 0;
 //long interval = 60000;
@@ -212,7 +215,23 @@ void setup_wifi() {
   delay(10);
   // We start by connecting to a WiFi network
   Serial.print("Connecting to ");
-  WiFi.begin(ssid, password);
+  Serial.println(ssid);
+  
+  // ==================== WPA 2 PSK ========================
+  // WiFi.begin(ssid, password);
+  
+  // ==================== WPA 2 Enterprise ========================
+  
+  WiFi.disconnect(true);  //disconnect form wifi to set new wifi connection
+  WiFi.mode(WIFI_STA); //init wifi mode
+  esp_wifi_sta_wpa2_ent_set_identity((uint8_t *)username, strlen(username)); //provide identity
+  esp_wifi_sta_wpa2_ent_set_username((uint8_t *)username, strlen(username)); //provide username --> identity and username is same
+  esp_wifi_sta_wpa2_ent_set_password((uint8_t *)password, strlen(password)); //provide password
+  esp_wpa2_config_t config = WPA2_CONFIG_INIT_DEFAULT(); //set config settings to default
+  esp_wifi_sta_wpa2_ent_enable(&config); //set config settings to enable function
+  // WPA2 Enterprise authentication ends here
+  
+  WiFi.begin(ssid); //connect to wifi 
   
   while ((WiFi.status() != WL_CONNECTED) && (wait < MINUTO )) {
     digitalWrite(LED, HIGH); // turn the LED on (HIGH is the voltage level)
@@ -253,8 +272,8 @@ void manage_INT1()
   String app1;
   
   t1_1= millis();//prendo il tempo
-  T1=(t1_1 - t1_0);
-  if (T1>1000){ //tolgo rumore (un impulso non può durare meno di un secondo altrimenti significa che stiamo consumando oltre 3,6KWora)
+  Tt1=(t1_1 - t1_0);
+  if (Tt1>1000){ //tolgo rumore (un impulso non può durare meno di un secondo altrimenti significa che stiamo consumando oltre 3,6KWora)
     Serial.print("\nAcquisizione da App1 :  ");    
     now1 = rtc.now();
     { // COMPONGO LA STRINGA DEL TIMESTAMP
@@ -272,7 +291,7 @@ void manage_INT1()
     app1=app1+buffer1;
     }
     Impulsi1[dimI1].t=app1;
-    Impulsi1[dimI1].dur=T1;
+    Impulsi1[dimI1].dur=Tt1;
     Serial.print(Impulsi1[dimI1].t);
     Serial.print(" | ");
     Serial.println(Impulsi1[dimI1].dur);      
@@ -286,8 +305,8 @@ void manage_INT2()
   String app2;
   
   t2_1= millis();//prendo il tempo
-  T2=(t2_1 - t2_0);
-  if (T2>1000){ //tolgo rumore (un impulso non può durare meno di un secondo altrimenti significa che stiamo consumando oltre 3,6KWora)
+  Tt2=(t2_1 - t2_0);
+  if (Tt2>1000){ //tolgo rumore (un impulso non può durare meno di un secondo altrimenti significa che stiamo consumando oltre 3,6KWora)
     Serial.print("\nAcquisizione da App2 :  ");    
     now2 = rtc.now();
     //timestamp(Impulsi2[dimI2].t);
@@ -306,7 +325,7 @@ void manage_INT2()
     app2=app2+buffer2;
     }
     Impulsi2[dimI2].t=app2;
-    Impulsi2[dimI2].dur=T2;
+    Impulsi2[dimI2].dur=Tt2;
     Serial.print(Impulsi2[dimI2].t);
     Serial.print(" | ");
     Serial.println(Impulsi2[dimI2].dur);      
@@ -320,8 +339,8 @@ void manage_INT3()
   String app3;
   
   t3_1= millis();//prendo il tempo
-  T3=(t3_1 - t3_0);
-  if (T3>1000){ //tolgo rumore (un impulso non può durare meno di un secondo altrimenti significa che stiamo consumando oltre 3,6KWora)
+  Tt3=(t3_1 - t3_0);
+  if (Tt3>1000){ //tolgo rumore (un impulso non può durare meno di un secondo altrimenti significa che stiamo consumando oltre 3,6KWora)
     Serial.print("\nAcquisizione da App3 :  ");    
     now3 = rtc.now();
     //timestamp(Impulsi3[dimI3].t);
@@ -340,7 +359,7 @@ void manage_INT3()
     app3=app3+buffer3;
     }
     Impulsi3[dimI3].t=app3;
-    Impulsi3[dimI3].dur=T3;
+    Impulsi3[dimI3].dur=Tt3;
     Serial.print(Impulsi3[dimI3].t);
     Serial.print(" | ");
     Serial.println(Impulsi3[dimI3].dur);      
@@ -354,8 +373,8 @@ void manage_INT4()
   String app4;
   
   t4_1= millis();//prendo il tempo
-  T4=(t4_1 - t4_0);
-  if (T4>1000){ //tolgo rumore (un impulso non può durare meno di un secondo altrimenti significa che stiamo consumando oltre 3,6KWora)
+  Tt4=(t4_1 - t4_0);
+  if (Tt4>1000){ //tolgo rumore (un impulso non può durare meno di un secondo altrimenti significa che stiamo consumando oltre 3,6KWora)
     Serial.print("\nAcquisizione da App4 :  ");    
     now4 = rtc.now();
     //timestamp(Impulsi4[dimI4].t);
@@ -374,7 +393,7 @@ void manage_INT4()
     app4=app4+buffer4;
     }
     Impulsi4[dimI4].t=app4;
-    Impulsi4[dimI4].dur=T4;
+    Impulsi4[dimI4].dur=Tt4;
     Serial.print(Impulsi4[dimI4].t);
     Serial.print(" | ");
     Serial.println(Impulsi4[dimI4].dur);      
@@ -455,7 +474,7 @@ void setup() {
    *       rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
    * ALTRIMENTI
   */ 
-  Serial.println(ntpUDP.localPort());
+  // Serial.println(ntpUDP.remtePort());
   Serial.println("waiting for sync");
   setSyncProvider(getNtpTime);
   setSyncInterval(300);
@@ -958,7 +977,7 @@ void loop() {
      *       rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
      * ALTRIMENTI
     */ 
-    Serial.println(ntpUDP.localPort());
+    // Serial.println(ntpUDP.remtePort());
     Serial.println("waiting for sync");
     setSyncProvider(getNtpTime);
     setSyncInterval(300);
