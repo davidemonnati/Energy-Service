@@ -57,12 +57,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
 var apartment_entity_1 = require("../entities/apartment.entity");
-var AreaRepository = /** @class */ (function (_super) {
-    __extends(AreaRepository, _super);
-    function AreaRepository() {
+var ApartmentRepository = /** @class */ (function (_super) {
+    __extends(ApartmentRepository, _super);
+    function ApartmentRepository() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    AreaRepository.prototype.create = function (apartment) {
+    ApartmentRepository.prototype.create = function (apartment) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -74,7 +74,7 @@ var AreaRepository = /** @class */ (function (_super) {
             });
         });
     };
-    AreaRepository.prototype.delete = function (apartment) {
+    ApartmentRepository.prototype.delete = function (apartment) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -86,7 +86,7 @@ var AreaRepository = /** @class */ (function (_super) {
             });
         });
     };
-    AreaRepository.prototype.getOneByUuid = function (uuid) {
+    ApartmentRepository.prototype.getOneByUuid = function (uuid) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -99,7 +99,7 @@ var AreaRepository = /** @class */ (function (_super) {
             });
         });
     };
-    AreaRepository.prototype.getAll = function () {
+    ApartmentRepository.prototype.getAll = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -109,9 +109,9 @@ var AreaRepository = /** @class */ (function (_super) {
             });
         });
     };
-    AreaRepository = __decorate([
+    ApartmentRepository = __decorate([
         typeorm_1.EntityRepository(apartment_entity_1.Apartment)
-    ], AreaRepository);
-    return AreaRepository;
+    ], ApartmentRepository);
+    return ApartmentRepository;
 }(typeorm_1.AbstractRepository));
-exports.AreaRepository = AreaRepository;
+exports.ApartmentRepository = ApartmentRepository;

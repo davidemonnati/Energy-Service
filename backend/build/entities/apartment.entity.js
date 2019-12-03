@@ -29,7 +29,7 @@ var Apartment = /** @class */ (function () {
         typeorm_1.Column({ type: 'text', nullable: true })
     ], Apartment.prototype, "description", void 0);
     __decorate([
-        typeorm_1.OneToMany(function (type) { return consumption_entity_1.Consumption; }, function (consumptions) { return consumptions.apartment; })
+        typeorm_1.OneToMany(function (type) { return consumption_entity_1.Consumption; }, function (consumption) { return consumption.apartment; })
     ], Apartment.prototype, "consumptions", void 0);
     Apartment = __decorate([
         typeorm_1.Entity("Apartment")
