@@ -15,11 +15,11 @@ export class Apartment {
     @Column({type: 'text', nullable: true })
     public description: string;
 
-    @OneToMany(type => Consumption, consumptions => consumptions.apartments)
+    @OneToMany(type => Consumption, consumptions => consumptions.apartment)
     public consumptions: Consumption[];
 
 
-    constructor(uuid: string, number: string, description: string, row: string, consuptions:Consuption[]){
+    constructor(uuid: string, number: string, description: string, row: string, consuptions:Consumption[]){
         this.uuid = uuid;
         this.number = number;
         this.row = row;
