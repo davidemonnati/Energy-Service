@@ -1,8 +1,31 @@
-import express = require('express');
+import 'reflect-metadata';
+import { useContainer as typeormUseContainer, createConnection } from 'typeorm';
+import { Container } from 'typedi';
+import { createExpressServer, useContainer as routingUseContainer } from 'routing-controllers';
+import { ApartmentController } from './controllers/apartment.controller';
+import { ConsumptionController } from './controllers/consumption.controller';
 
-const app: express.Application = express();
 
+typeormUseContainer(Container)
+routingUseContainer(Container)
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
-  });
+const port = process.env.PORT || 3000;
+
+const app = createExpressServer({
+    controllers: [
+        ApartmentController,
+        ConsumptionController,
+    ],
+    classTransformer: true,
+    validation: true
+});
+
+app.listen(port, () => {
+    console.log("Service listening on port " + port);
+})
+
+createConnection()
+.then(async connection => {
+    console.log("Database connection started successfully");
+})
+.catch(error => console.log(error))
