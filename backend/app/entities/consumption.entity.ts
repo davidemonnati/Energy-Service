@@ -1,9 +1,9 @@
-import {Entity, ManyToOne, PrimaryColumn, Column } from "typeorm";
+import {Entity, ManyToOne, PrimaryColumn, Column, PrimaryGeneratedColumn } from "typeorm";
 import {Apartment} from "./apartment.entity";
 
 @Entity("Consumption")
 export class Consumption {
-    @PrimaryColumn('uuid')
+    @PrimaryGeneratedColumn('uuid')
     public uuid: string;
 
     @Column({type: 'varchar', length: 150})

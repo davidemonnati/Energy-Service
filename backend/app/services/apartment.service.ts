@@ -3,12 +3,16 @@ import { InjectRepository } from 'typeorm-typedi-extensions';
 import { ApartmentRepository } from '../repositories/apartment.repository';
 import { Apartment } from '../entities/apartment.entity';
 import { ApartmentDTO } from '../dto/apartments.dto';
+import { ConsumptionDTO } from '../dto/consumption.dto';
+import { Consumption } from '../entities/consumption.entity';
+import { ConsumptionService } from './consumption.service';
 
 Service()
 export class ApartmentService {
     constructor(
         @InjectRepository()
         private readonly apartmentRepository: ApartmentRepository,
+        private readonly consumptionRepository: ConsumptionService,
     ) {}
 
     async create(apartmentDto: ApartmentDTO): Promise<void> {
@@ -23,6 +27,18 @@ export class ApartmentService {
     async getOneByUuid(uuid: string): Promise<Apartment> {
         return await this.apartmentRepository.getOneByUuid(uuid);
     }
+
+    public async getConsumptionsOfApartment(apartmentUuid: string): Promise<Consumption[]> {
+        let apartment = await this.apartmentRepository.getOneByUuid(apartmentUuid);
+        let consumptions:Consumption[] = new Array();
+        for(let consumption of apartment.consumptions)
+        {
+            const consumptionsOfApartment = await this.consumptionRepository.getOneByUuid(consumption.uuid);
+            consumptions.push(consumptionsOfApartment);
+        }
+        return await consumptions;
+    }
+
 
     async getAll(): Promise<Apartment[]> {
         return await this.apartmentRepository.getAll();

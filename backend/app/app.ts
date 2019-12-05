@@ -9,7 +9,7 @@ import { ConsumptionController } from './controllers/consumption.controller';
 typeormUseContainer(Container)
 routingUseContainer(Container)
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3008;
 
 const app = createExpressServer({
     controllers: [

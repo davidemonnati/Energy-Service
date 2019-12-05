@@ -20,7 +20,7 @@ export class ConsumptionController {
         })
     }
 
-    @Delete('/consumptions/:uuid')
+    @Delete('/:uuid')
     @OnUndefined(201)
     async delete(@Param('uuid') uuid: string, @Req() req: Request) {
         LogsUtil.logRequest(req);
@@ -30,7 +30,7 @@ export class ConsumptionController {
         })
     }
 
-    @Get('/consumptions/:uuid')
+    @Get('/:uuid')
     @OnUndefined(404)
     async getOneByUuid(@Param('uuid') uuid: string, @Req() req: Request): Promise<Consumption> {
         LogsUtil.logRequest(req);

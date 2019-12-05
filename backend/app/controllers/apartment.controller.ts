@@ -4,6 +4,7 @@ import { ApartmentDTO } from '../dto/apartments.dto';
 import { LogsUtil } from '../utils/logs.util';
 import { Apartment } from '../entities/apartment.entity';
 import { ApartmentService } from '../services/apartment.service';
+import { Consumption } from '../entities/consumption.entity';
 
 
 @JsonController('/apartments')
@@ -19,7 +20,7 @@ export class ApartmentController {
         })
     }
 
-    @Delete('/apartments/:uuid')
+    @Delete('/:uuid')
     @OnUndefined(201)
     async delete(@Param('uuid') uuid: string, @Req() req: Request) {
         LogsUtil.logRequest(req);
@@ -29,11 +30,21 @@ export class ApartmentController {
         })
     }
 
-    @Get('/apartments/:uuid')
+    @Get('/:uuid')
     @OnUndefined(404)
     async getOneByUuid(@Param('uuid') uuid: string, @Req() req: Request): Promise<Apartment> {
         LogsUtil.logRequest(req);
         return await this.apartmentService.getOneByUuid(uuid)
+        .catch(() => {
+            throw new NotFoundError();
+        })
+    }
+
+    @Get('/:uuid/consumptions')
+    @OnUndefined(404)
+    async getConsumptionsByApartments(@Param('uuid') uuid: string, @Req() req: Request): Promise<Consumption[]> {
+        LogsUtil.logRequest(req);
+        return await this.apartmentService.getConsumptionsOfApartment(uuid)
         .catch(() => {
             throw new NotFoundError();
         })

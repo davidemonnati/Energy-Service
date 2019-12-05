@@ -1,15 +1,15 @@
-import { Entity, Column, OneToMany, PrimaryColumn } from "typeorm";
+import { Entity, Column, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import {Consumption} from "./consumption.entity";
 
 @Entity("Apartment")
 export class Apartment {
-    @PrimaryColumn('uuid')
+    @PrimaryGeneratedColumn('uuid')
     public uuid: string;
 
-    @Column({type: 'varchar', length: 150})
+    @Column({type: 'varchar', length: 150, nullable: false})
     public number: string;
 
-    @Column({type: 'varchar', length: 150})
+    @Column({type: 'varchar', length: 150, nullable: false})
     public row: string;
 
     @Column({type: 'text', nullable: true })
