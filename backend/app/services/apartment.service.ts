@@ -28,6 +28,10 @@ export class ApartmentService {
         return await this.apartmentRepository.getOneByUuid(uuid);
     }
 
+    async getApartment(row: string, number: string): Promise<Apartment> {
+        return await this.apartmentRepository.getApartment(row, number);
+    }
+
     public async getConsumptionsOfApartment(apartmentUuid: string): Promise<Consumption[]> {
         let apartment = await this.apartmentRepository.getOneByUuid(apartmentUuid);
         let consumptions:Consumption[] = new Array();

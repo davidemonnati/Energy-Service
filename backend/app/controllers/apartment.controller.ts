@@ -40,6 +40,16 @@ export class ApartmentController {
         })
     }
 
+    @Get('/:row/:number')
+    @OnUndefined(404)
+    async getApartment(@Param('row') row: string, @Param('number') number: string, @Req() req: Request): Promise<Apartment> {
+        LogsUtil.logRequest(req);
+        return await this.apartmentService.getApartment(row,number)
+        .catch(() => {
+            throw new NotFoundError();
+        })
+    }
+
     @Get('/:uuid/consumptions')
     @OnUndefined(404)
     async getConsumptionsByApartments(@Param('uuid') uuid: string, @Req() req: Request): Promise<Consumption[]> {

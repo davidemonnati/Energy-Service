@@ -17,7 +17,14 @@ export class ApartmentRepository extends AbstractRepository<Apartment> {
             where: {uuid: uuid},
             relations: ['consumptions']
         });
-    } 
+    }
+
+
+    public async getApartment(row: string, number: string): Promise<Apartment> {
+        return await this.repository.findOneOrFail({
+            where: {row: row} && {number:number},
+        });
+    }
 
     public async getAll(): Promise<Apartment[]> {
         return await this.repository.find();
