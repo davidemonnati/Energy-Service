@@ -16,8 +16,7 @@ client.subscribe('#');
 
 client.on('message', function (topic, message){
   var topicArray = topic.split('/');
-  var consumptionArray = String(message).split(' ');
-  console.log(topicArray);
+  var consumptionArray = String(message).trim().split(/\s+/);
 
   getApartment(backendUrl + '/apartments/' + topicArray[0] + '/' + topicArray[1])
   .then( function(data) {
