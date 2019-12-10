@@ -52,9 +52,19 @@ export class ApartmentController {
 
     @Get('/:uuid/consumptions')
     @OnUndefined(404)
-    async getConsumptionsByApartments(@Param('uuid') uuid: string, @Req() req: Request): Promise<Consumption[]> {
+    async getConsumptionsByApartmentUuid(@Param('uuid') uuid: string, @Req() req: Request): Promise<Consumption[]> {
         LogsUtil.logRequest(req);
-        return await this.apartmentService.getConsumptionsOfApartment(uuid)
+        return await this.apartmentService.getConsumptionsOfApartmentUuid(uuid)
+        .catch(() => {
+            throw new NotFoundError();
+        })
+    }
+
+    @Get('/:row/:number')
+    @OnUndefined(404)
+    async getConsumptionsByApartmentName(@Param('row') row: string, @Param('number') number: string, @Req() req: Request): Promise<Consumption[]> {
+        LogsUtil.logRequest(req);
+        return await this.apartmentService.getConsumptionsOfApartmentName(row,number)
         .catch(() => {
             throw new NotFoundError();
         })

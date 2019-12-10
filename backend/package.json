@@ -19,6 +19,7 @@
     "express-logging-utility": "^1.0.1",
     "log-util": "^2.3.0",
     "log-utils": "^1.0.0",
+    "mqtt": "^3.0.0",
     "pg": "^7.14.0",
     "routing-controllers": "^0.8.0",
     "transformer": "^1.2.7",
