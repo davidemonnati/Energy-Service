@@ -32,7 +32,7 @@ export class ApartmentService {
         return await this.apartmentRepository.getApartment(row, number);
     }
 
-    public async getConsumptionsOfApartmentUuid(apartmentUuid: string): Promise<Consumption[]> {
+    async getConsumptionsOfApartmentUuid(apartmentUuid: string): Promise<Consumption[]> {
         let apartment = await this.apartmentRepository.getOneByUuid(apartmentUuid);
         let consumptions:Consumption[] = new Array();
         for(let consumption of apartment.consumptions)
@@ -43,7 +43,7 @@ export class ApartmentService {
         return await consumptions;
     }
 
-    public async getConsumptionsOfApartmentName(row: string, number: string): Promise<Consumption[]> {
+    async getConsumptionsOfApartmentName(row: string, number: string): Promise<Consumption[]> {
         let apartment = await this.apartmentRepository.getApartment(row, number);
         let consumptions:Consumption[] = new Array();
         for(let consumption of apartment.consumptions)

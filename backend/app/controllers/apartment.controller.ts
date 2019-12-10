@@ -60,7 +60,7 @@ export class ApartmentController {
         })
     }
 
-    @Get('/:row/:number')
+    @Get('/:row/:number/consumptions')
     @OnUndefined(404)
     async getConsumptionsByApartmentName(@Param('row') row: string, @Param('number') number: string, @Req() req: Request): Promise<Consumption[]> {
         LogsUtil.logRequest(req);

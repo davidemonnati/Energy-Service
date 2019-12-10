@@ -19,10 +19,10 @@ export class ApartmentRepository extends AbstractRepository<Apartment> {
         });
     }
 
-
     public async getApartment(row: string, number: string): Promise<Apartment> {
         return await this.repository.findOneOrFail({
             where: {row: row} && {number:number},
+            relations: ['consumptions']
         });
     }
 
