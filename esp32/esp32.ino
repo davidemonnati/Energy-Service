@@ -282,7 +282,7 @@ void manage_INT1()
     dtostrf(now1.month(),2,0,buffer1);
     app1=app1+buffer1+"-";
     dtostrf(now1.day(),2,0,buffer1);
-    app1=app1+buffer1+" ";
+    app1=app1+buffer1+"_";
     dtostrf(now1.hour(),2,0,buffer1);
     app1=app1+buffer1+":";
     dtostrf(now1.minute(),2,0,buffer1);
@@ -316,7 +316,7 @@ void manage_INT2()
     dtostrf(now2.month(),2,0,buffer2);
     app2=app2+buffer2+"-";
     dtostrf(now2.day(),2,0,buffer2);
-    app2=app2+buffer2+" ";
+    app2=app2+buffer2+"_";
     dtostrf(now2.hour(),2,0,buffer2);
     app2=app2+buffer2+":";
     dtostrf(now2.minute(),2,0,buffer2);
@@ -350,7 +350,7 @@ void manage_INT3()
     dtostrf(now3.month(),2,0,buffer3);
     app3=app3+buffer3+"-";
     dtostrf(now3.day(),2,0,buffer3);
-    app3=app3+buffer3+" ";
+    app3=app3+buffer3+"_";
     dtostrf(now3.hour(),2,0,buffer3);
     app3=app3+buffer3+":";
     dtostrf(now3.minute(),2,0,buffer3);
@@ -384,7 +384,7 @@ void manage_INT4()
     dtostrf(now4.month(),2,0,buffer4);
     app4=app4+buffer4+"-";
     dtostrf(now4.day(),2,0,buffer4);
-    app4=app4+buffer4+" ";
+    app4=app4+buffer4+"_";
     dtostrf(now4.hour(),2,0,buffer4);
     app4=app4+buffer4+":";
     dtostrf(now4.minute(),2,0,buffer4);
@@ -431,7 +431,7 @@ void timestamp(String app) {
   dtostrf(adesso.month(),2,0,buffer0);
   app=app+buffer0+"-";
   dtostrf(adesso.day(),2,0,buffer0);
-  app=app+buffer0+" ";
+  app=app+buffer0+"_";
   dtostrf(adesso.hour(),2,0,buffer0);
   app=app+buffer0+":";
   dtostrf(adesso.minute(),2,0,buffer0);
@@ -530,7 +530,7 @@ void loop() {
     dtostrf(now1.month(),2,0,buffer0);
     app0=app0+buffer0+"-";
     dtostrf(now1.day(),2,0,buffer0);
-    app0=app0+buffer0+" ";
+    app0=app0+buffer0+"_";
     dtostrf(now1.hour(),2,0,buffer0);
     app0=app0+buffer0+":";
     dtostrf(now1.minute(),2,0,buffer0);
@@ -627,7 +627,7 @@ void loop() {
     dtostrf(now2.month(),2,0,buffer0);
     app0=app0+buffer0+"-";
     dtostrf(now2.day(),2,0,buffer0);
-    app0=app0+buffer0+" ";
+    app0=app0+buffer0+"_";
     dtostrf(now2.hour(),2,0,buffer0);
     app0=app0+buffer0+":";
     dtostrf(now2.minute(),2,0,buffer0);
@@ -720,7 +720,7 @@ void loop() {
     dtostrf(now3.month(),2,0,buffer0);
     app0=app0+buffer0+"-";
     dtostrf(now3.day(),2,0,buffer0);
-    app0=app0+buffer0+" ";
+    app0=app0+buffer0+"_";
     dtostrf(now3.hour(),2,0,buffer0);
     app0=app0+buffer0+":";
     dtostrf(now3.minute(),2,0,buffer0);
@@ -813,7 +813,7 @@ void loop() {
     dtostrf(now4.month(),2,0,buffer0);
     app0=app0+buffer0+"-";
     dtostrf(now4.day(),2,0,buffer0);
-    app0=app0+buffer0+" ";
+    app0=app0+buffer0+"_";
     dtostrf(now4.hour(),2,0,buffer0);
     app0=app0+buffer0+":";
     dtostrf(now4.minute(),2,0,buffer0);
@@ -908,7 +908,7 @@ void loop() {
     for (i=0;i<dimC1;i++){    //INVIO VETTORI CONSUMI1 MQTT
       if (Consumi1[i].sent==0){
         dtostrf(Consumi1[i].w,4,0,buffer0);
-        payload=Consumi1[i].t+" | "+buffer0;
+        payload=Consumi1[i].t+"_"+buffer0;
         Serial.println(payload);      
         payload.toCharArray(buffer0,30);  
         client.publish(outTopic_Ap1, buffer0);
@@ -920,7 +920,7 @@ void loop() {
     for (i=0;i<dimC2;i++){    //INVIO VETTORI CONSUMI2 MQTT
       if (Consumi2[i].sent==0){
         dtostrf(Consumi2[i].w,4,0,buffer0);
-        payload=Consumi2[i].t+" | "+buffer0;
+        payload=Consumi2[i].t+"_"+buffer0;
         Serial.println(payload);      
         payload.toCharArray(buffer0,30);  
         client.publish(outTopic_Ap2, buffer0);
@@ -932,7 +932,7 @@ void loop() {
     for (i=0;i<dimC3;i++){    //INVIO VETTORI CONSUMI3 MQTT
       if (Consumi3[i].sent==0){
         dtostrf(Consumi3[i].w,4,0,buffer0);
-        payload=Consumi3[i].t+" | "+buffer0;
+        payload=Consumi3[i].t+"_"+buffer0;
         Serial.println(payload);      
         payload.toCharArray(buffer0,30);  
         client.publish(outTopic_Ap3, buffer0);
@@ -944,7 +944,7 @@ void loop() {
     for (i=0;i<dimC4;i++){    //INVIO VETTORI CONSUMI4 MQTT
       if (Consumi4[i].sent==0){
         dtostrf(Consumi4[i].w,4,0,buffer0);
-        payload=Consumi4[i].t+" | "+buffer0;
+        payload=Consumi4[i].t+"_"+buffer0;
         Serial.println(payload);
         payload.toCharArray(buffer0,30);  
         client.publish(outTopic_Ap4, buffer0);
