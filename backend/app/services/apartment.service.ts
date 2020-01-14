@@ -19,25 +19,25 @@ export class ApartmentService {
         await this.apartmentRepository.create(apartmentDto);
     }
 
-    async delete(uuid: string) {
-        await this.apartmentRepository.getOneByUuid(uuid)
+    async delete(id: number) {
+        await this.apartmentRepository.getOneByid(id)
         .then((apartment) => this.apartmentRepository.delete(apartment));
     }
 
-    async getOneByUuid(uuid: string): Promise<Apartment> {
-        return await this.apartmentRepository.getOneByUuid(uuid);
+    async getOneByid(id: number): Promise<Apartment> {
+        return await this.apartmentRepository.getOneByid(id);
     }
 
     async getApartment(row: string, number: string): Promise<Apartment> {
         return await this.apartmentRepository.getApartment(row, number);
     }
 
-    async getConsumptionsOfApartmentUuid(apartmentUuid: string): Promise<Consumption[]> {
-        let apartment = await this.apartmentRepository.getOneByUuid(apartmentUuid);
+    async getConsumptionsOfApartmentid(apartmentid: number): Promise<Consumption[]> {
+        let apartment = await this.apartmentRepository.getOneByid(apartmentid);
         let consumptions:Consumption[] = new Array();
         for(let consumption of apartment.consumptions)
         {
-            const consumptionsOfApartment = await this.consumptionRepository.getOneByUuid(consumption.uuid);
+            const consumptionsOfApartment = await this.consumptionRepository.getOneByid(consumption.id);
             consumptions.push(consumptionsOfApartment);
         }
         return await consumptions;
@@ -48,7 +48,7 @@ export class ApartmentService {
         let consumptions:Consumption[] = new Array();
         for(let consumption of apartment.consumptions)
         {
-            const consumptionsOfApartment = await this.consumptionRepository.getOneByUuid(consumption.uuid);
+            const consumptionsOfApartment = await this.consumptionRepository.getOneByid(consumption.id);
             consumptions.push(consumptionsOfApartment);
         }
         return await consumptions;

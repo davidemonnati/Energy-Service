@@ -12,9 +12,9 @@ export class ApartmentRepository extends AbstractRepository<Apartment> {
         await this.repository.remove(apartment);
     }
 
-    public async getOneByUuid(uuid: string): Promise<Apartment> {
+    public async getOneByid(id: number): Promise<Apartment> {
         return await this.repository.findOneOrFail({
-            where: {uuid: uuid},
+            where: {id: id},
             relations: ['consumptions']
         });
     }

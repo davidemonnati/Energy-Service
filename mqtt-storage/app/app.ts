@@ -16,7 +16,7 @@ client.subscribe('#');
 
 client.on('message', function (topic, message){
   var topicArray = topic.split('/');
-  var consumptionArray = String(message).split('_');
+  var consumptionArray = String(message).trim().split(/\s+/);
 
   getApartment(backendUrl + '/apartments/' + topicArray[0] + '/' + topicArray[1])
   .then( function(data) {
@@ -28,15 +28,15 @@ async function getApartment(url: string): Promise<String> {
   var options = {
     uri: url,
   };
-  return JSON.parse(await request.get(options)).uuid;
+  return JSON.parse(await request.get(options)).id;
 }
 
-async function saveData(consumptionArray: string[], uuidApartment: String, topic: string[]){
+async function saveData(consumptionArray: string[], idApartment: String, topic: string[]){
   var JSONData = {
     'date': consumptionArray[0],
     'time': consumptionArray[1],
     'value': consumptionArray[2],
-    'apartment': uuidApartment
+    'apartment': idApartment
   }
   await request.post({
     url: backendUrl + '/consumptions/',

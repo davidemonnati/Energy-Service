@@ -3,8 +3,8 @@ import {Consumption} from "./consumption.entity";
 
 @Entity("Apartment")
 export class Apartment {
-    @PrimaryGeneratedColumn('uuid')
-    public uuid: string;
+    @PrimaryGeneratedColumn()
+    public id: number;
 
     @Column({type: 'varchar', length: 150, nullable: false})
     public number: string;
@@ -19,8 +19,8 @@ export class Apartment {
     public consumptions: Consumption[];
 
 
-    constructor(uuid: string, number: string, description: string, row: string, consuptions:Consumption[]){
-        this.uuid = uuid;
+    constructor(id: number, number: string, description: string, row: string, consuptions:Consumption[]){
+        this.id = id;
         this.number = number;
         this.row = row;
         this.description = description;

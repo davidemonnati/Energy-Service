@@ -13,9 +13,9 @@ export class ConsumptionRepository extends AbstractRepository<Consumption> {
         await this.repository.remove(consumption);
     }
 
-    public async getOneByUuid(uuid: string): Promise<Consumption> {
+    public async getOneByid(id: number): Promise<Consumption> {
         return await this.repository.findOneOrFail({
-            where: {uuid: uuid},
+            where: {id: id},
             relations: ['apartment'],
         });
     }
