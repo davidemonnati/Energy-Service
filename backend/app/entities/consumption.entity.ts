@@ -3,8 +3,8 @@ import {Apartment} from "./apartment.entity";
 
 @Entity("Consumption")
 export class Consumption {
-    @PrimaryGeneratedColumn('uuid')
-    public uuid: string;
+    @PrimaryGeneratedColumn()
+    public id: number;
 
     @Column({type: 'varchar', length: 150})
     public date: string;
@@ -18,8 +18,8 @@ export class Consumption {
     @ManyToOne(type => Apartment, apartments => apartments.consumptions, {nullable: false, onDelete: "CASCADE"})
     public apartment: Apartment;
 
-    constructor(uuid: string, date: string, time: string, value: number, apartment: Apartment){
-        this.uuid = uuid;
+    constructor(id: number, date: string, time: string, value: number, apartment: Apartment){
+        this.id = id;
         this.date = date;
         this.time = time;
         this.value = value;

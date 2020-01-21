@@ -20,21 +20,21 @@ export class ConsumptionController {
         })
     }
 
-    @Delete('/:uuid')
+    @Delete('/:id')
     @OnUndefined(201)
-    async delete(@Param('uuid') uuid: string, @Req() req: Request) {
+    async delete(@Param('id') id: number, @Req() req: Request) {
         LogsUtil.logRequest(req);
-        await this.consumptionService.delete(uuid)
+        await this.consumptionService.delete(id)
         .catch(() => {
             throw new BadRequestError();
         })
     }
 
-    @Get('/:uuid')
+    @Get('/:id')
     @OnUndefined(404)
-    async getOneByUuid(@Param('uuid') uuid: string, @Req() req: Request): Promise<Consumption> {
+    async getOneByid(@Param('id') id: number, @Req() req: Request): Promise<Consumption> {
         LogsUtil.logRequest(req);
-        return await this.consumptionService.getOneByUuid(uuid)
+        return await this.consumptionService.getOneByid(id)
         .catch(() => {
             throw new NotFoundError();
         })

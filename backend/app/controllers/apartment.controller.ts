@@ -20,21 +20,21 @@ export class ApartmentController {
         })
     }
 
-    @Delete('/:uuid')
+    @Delete('/:id')
     @OnUndefined(201)
-    async delete(@Param('uuid') uuid: string, @Req() req: Request) {
+    async delete(@Param('id') id: number, @Req() req: Request) {
         LogsUtil.logRequest(req);
-        await this.apartmentService.delete(uuid)
+        await this.apartmentService.delete(id)
         .catch(() => {
             throw new BadRequestError();
         })
     }
 
-    @Get('/:uuid')
+    @Get('/:id')
     @OnUndefined(404)
-    async getOneByUuid(@Param('uuid') uuid: string, @Req() req: Request): Promise<Apartment> {
+    async getOneByid(@Param('id') id: number, @Req() req: Request): Promise<Apartment> {
         LogsUtil.logRequest(req);
-        return await this.apartmentService.getOneByUuid(uuid)
+        return await this.apartmentService.getOneByid(id)
         .catch(() => {
             throw new NotFoundError();
         })
@@ -50,11 +50,11 @@ export class ApartmentController {
         })
     }
 
-    @Get('/:uuid/consumptions')
+    @Get('/:id/consumptions')
     @OnUndefined(404)
-    async getConsumptionsByApartmentUuid(@Param('uuid') uuid: string, @Req() req: Request): Promise<Consumption[]> {
+    async getConsumptionsByApartmentid(@Param('id') id: number, @Req() req: Request): Promise<Consumption[]> {
         LogsUtil.logRequest(req);
-        return await this.apartmentService.getConsumptionsOfApartmentUuid(uuid)
+        return await this.apartmentService.getConsumptionsOfApartmentid(id)
         .catch(() => {
             throw new NotFoundError();
         })

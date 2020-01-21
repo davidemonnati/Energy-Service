@@ -28,15 +28,15 @@ async function getApartment(url: string): Promise<String> {
   var options = {
     uri: url,
   };
-  return JSON.parse(await request.get(options)).uuid;
+  return JSON.parse(await request.get(options)).id;
 }
 
-async function saveData(consumptionArray: string[], uuidApartment: String, topic: string[]){
+async function saveData(consumptionArray: string[], idApartment: String, topic: string[]){
   var JSONData = {
     'date': consumptionArray[0],
     'time': consumptionArray[1],
     'value': consumptionArray[2],
-    'apartment': uuidApartment
+    'apartment': idApartment
   }
   await request.post({
     url: backendUrl + '/consumptions/',

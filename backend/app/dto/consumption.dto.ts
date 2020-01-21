@@ -1,7 +1,7 @@
 import { Apartment } from '../entities/apartment.entity';
 
 export class ConsumptionDTO {
-    readonly uuid!: string;
+    readonly id!: number;
     readonly date !: string;
     readonly time !: string;
     readonly value !: number;
