@@ -51,6 +51,21 @@ export class ApartmentService {
             const consumptionsOfApartment = await this.consumptionRepository.getOneByid(consumption.id);
             consumptions.push(consumptionsOfApartment);
         }
+
+        function compare(a:any, b:any) {
+            const dateA = a.datetime;
+            const dateB = b.datetime;
+          
+            let comparison = 0;
+            if (dateA > dateB) {
+              comparison = 1;
+            } else if (dateA < dateB) {
+              comparison = -1;
+            }
+            return comparison;
+          }
+          consumptions.sort(compare);
+
         return await consumptions;
     }
 
