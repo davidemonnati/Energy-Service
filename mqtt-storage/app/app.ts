@@ -33,8 +33,7 @@ async function getApartment(url: string): Promise<String> {
 
 async function saveData(consumptionArray: string[], idApartment: String, topic: string[]){
   var JSONData = {
-    'datetimes': consumptionArray[0] + " " + consumptionArray[1],
-    // 'time': consumptionArray[1],
+    'datetime': consumptionArray[0] + " " + consumptionArray[1],
     'value': consumptionArray[2],
     'apartment': idApartment
   }
