@@ -3,7 +3,6 @@ import { InjectRepository } from 'typeorm-typedi-extensions';
 import { ApartmentRepository } from '../repositories/apartment.repository';
 import { Apartment } from '../entities/apartment.entity';
 import { ApartmentDTO } from '../dto/apartments.dto';
-import { ConsumptionDTO } from '../dto/consumption.dto';
 import { Consumption } from '../entities/consumption.entity';
 import { ConsumptionService } from './consumption.service';
 

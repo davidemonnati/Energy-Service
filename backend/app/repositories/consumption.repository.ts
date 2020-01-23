@@ -1,6 +1,5 @@
 import { EntityRepository, AbstractRepository } from "typeorm";
 import { Consumption } from "../entities/consumption.entity";
-import { Apartment } from "../entities/apartment.entity";
 
 @EntityRepository(Consumption)
 export class ConsumptionRepository extends AbstractRepository<Consumption> {
