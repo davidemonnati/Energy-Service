@@ -3,7 +3,6 @@ import { InjectRepository } from 'typeorm-typedi-extensions';
 import { ApartmentRepository } from '../repositories/apartment.repository';
 import { Apartment } from '../entities/apartment.entity';
 import { ApartmentDTO } from '../dto/apartments.dto';
-import { ConsumptionDTO } from '../dto/consumption.dto';
 import { Consumption } from '../entities/consumption.entity';
 import { ConsumptionService } from './consumption.service';
 
@@ -51,6 +50,21 @@ export class ApartmentService {
             const consumptionsOfApartment = await this.consumptionRepository.getOneByid(consumption.id);
             consumptions.push(consumptionsOfApartment);
         }
+
+        function compare(a:any, b:any) {
+            const dateA = a.datetime;
+            const dateB = b.datetime;
+          
+            let comparison = 0;
+            if (dateA > dateB) {
+              comparison = 1;
+            } else if (dateA < dateB) {
+              comparison = -1;
+            }
+            return comparison;
+          }
+          consumptions.sort(compare);
+
         return await consumptions;
     }
 

@@ -1,4 +1,4 @@
-import { Entity, Column, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import {Consumption} from "./consumption.entity";
 
 @Entity("Apartment")
