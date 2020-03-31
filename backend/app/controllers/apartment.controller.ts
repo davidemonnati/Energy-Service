@@ -70,6 +70,13 @@ export class ApartmentController {
         })
     }
 
+    @Get('/:row/:number/consumptions/:day/:mounth/:year')
+    @OnUndefined(404)
+    async getConsumptionsByDate(@Param('row') row: string, @Param('number') number: string, @Param('day') day: string, @Param('mounth') mounth: string, 
+        @Param('year') year: string, @Req() req: Request): Promise<Consumption[]> {
+            return await this.apartmentService.getConsumptionsByDate(row, number,day,mounth,year);
+    }
+
     @Get()
     @OnUndefined(404)
     async getAll(@Req() req: Request): Promise<Apartment[]> {

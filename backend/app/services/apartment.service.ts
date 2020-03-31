@@ -50,20 +50,23 @@ export class ApartmentService {
             const consumptionsOfApartment = await this.consumptionRepository.getOneByid(consumption.id);
             consumptions.push(consumptionsOfApartment);
         }
+        consumptions.sort((a,b) => b.datetime > a.datetime ? -1 : 1);
 
-        function compare(a:any, b:any) {
-            const dateA = a.datetime;
-            const dateB = b.datetime;
-          
-            let comparison = 0;
-            if (dateA > dateB) {
-              comparison = 1;
-            } else if (dateA < dateB) {
-              comparison = -1;
+        return await consumptions;
+    }
+
+    async getConsumptionsByDate(row: string, number: string, day: string, mounth: string, year: string): Promise<Consumption[]> {
+        let apartment = await this.apartmentRepository.getApartment(row, number);
+        let consumptions:Consumption[] = new Array();
+        let datetime = day + '/' + mounth + '/' + year;
+        for(let consumption of apartment.consumptions)
+        {
+            const consumptionsOfApartment = await this.consumptionRepository.getOneByid(consumption.id);
+            if(consumptionsOfApartment.datetime.includes(datetime)){
+                consumptions.push(consumptionsOfApartment);
             }
-            return comparison;
-          }
-          consumptions.sort(compare);
+        }
+        consumptions.sort((a,b) => b.datetime > a.datetime ? -1 : 1);
 
         return await consumptions;
     }
