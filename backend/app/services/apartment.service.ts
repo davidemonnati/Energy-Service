@@ -58,7 +58,7 @@ export class ApartmentService {
     async getConsumptionsByDate(row: string, number: string, day: string, mounth: string, year: string): Promise<Consumption[]> {
         let apartment = await this.apartmentRepository.getApartment(row, number);
         let consumptions:Consumption[] = new Array();
-        let datetime = day + '/' + mounth + '/' + year;
+        let datetime = year + '/' + mounth + '/' + day;
         for(let consumption of apartment.consumptions)
         {
             const consumptionsOfApartment = await this.consumptionRepository.getOneByid(consumption.id);
