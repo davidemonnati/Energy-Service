@@ -11,6 +11,7 @@ routingUseContainer(Container)
 const port = process.env.PORT || 3008;
 
 const app = createExpressServer({
+    cors: true,
     controllers: [
         ApartmentController,
         ConsumptionController,

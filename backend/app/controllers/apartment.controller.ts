@@ -70,6 +70,21 @@ export class ApartmentController {
         })
     }
 
+    @Get('/:row/:number/consumptions/:year/:mounth/:day')
+    @OnUndefined(404)
+    async getConsumptionsByDate(@Param('row') row: string, @Param('number') number: string, @Param('year') year: string, @Param('mounth') mounth: string, 
+        @Param('day') day: string, @Req() req: Request): Promise<Consumption[]> {
+            return await this.apartmentService.getConsumptionsByDate(row, number, year, mounth, day);
+    }
+
+    @Get('/:row/:number/consumptions/:year/:mounth/:day/:year1/:mounth1/:day1')
+    @OnUndefined(404)
+    async getConsumptionsByRangeDates(@Param('row') row: string, @Param('number') number: string, @Param('year') year: string, @Param('mounth') mounth: string, 
+        @Param('day') day: string,@Param('year1') year2: string, @Param('mounth1') mounth2: string, 
+        @Param('day1') day2: string, @Req() req: Request): Promise<Consumption[]> {
+            return await this.apartmentService.getConsumptionsByRangeDates(row, number,day,mounth,year,day2,mounth2,year2);
+    }
+
     @Get()
     @OnUndefined(404)
     async getAll(@Req() req: Request): Promise<Apartment[]> {
