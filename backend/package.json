@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",
     "tsc": "tsc"
   },
   "author": "",
@@ -25,6 +26,7 @@
     "pg": "^7.14.0",
     "routing-controllers": "^0.8.0",
     "transformer": "^1.2.7",
+    "ts-node-dev": "^1.0.0-pre.44",
     "typedi": "^0.8.0",
     "typeorm": "^0.2.20",
     "typeorm-typedi-extensions": "^0.2.3",
