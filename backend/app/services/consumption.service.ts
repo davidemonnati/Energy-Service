@@ -15,13 +15,13 @@ export class ConsumptionService {
         await this.consumptionRepository.create(consumptionDto);
     }
 
-    async delete(uuid: string) {
-        await this.consumptionRepository.getOneByUuid(uuid)
+    async delete(id: number) {
+        await this.consumptionRepository.getOneByid(id)
         .then((consumption) => this.consumptionRepository.delete(consumption));
     }
 
-    async getOneByUuid(uuid: string): Promise<Consumption> {
-        return await this.consumptionRepository.getOneByUuid(uuid);
+    async getOneByid(id: number): Promise<Consumption> {
+        return await this.consumptionRepository.getOneByid(id);
     }
 
     async getAll(): Promise<Consumption[]> {

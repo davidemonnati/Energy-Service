@@ -20,21 +20,21 @@ export class ApartmentController {
         })
     }
 
-    @Delete('/:uuid')
+    @Delete('/:id')
     @OnUndefined(201)
-    async delete(@Param('uuid') uuid: string, @Req() req: Request) {
+    async delete(@Param('id') id: number, @Req() req: Request) {
         LogsUtil.logRequest(req);
-        await this.apartmentService.delete(uuid)
+        await this.apartmentService.delete(id)
         .catch(() => {
             throw new BadRequestError();
         })
     }
 
-    @Get('/:uuid')
+    @Get('/:id')
     @OnUndefined(404)
-    async getOneByUuid(@Param('uuid') uuid: string, @Req() req: Request): Promise<Apartment> {
+    async getOneByid(@Param('id') id: number, @Req() req: Request): Promise<Apartment> {
         LogsUtil.logRequest(req);
-        return await this.apartmentService.getOneByUuid(uuid)
+        return await this.apartmentService.getOneByid(id)
         .catch(() => {
             throw new NotFoundError();
         })
@@ -50,11 +50,11 @@ export class ApartmentController {
         })
     }
 
-    @Get('/:uuid/consumptions')
+    @Get('/:id/consumptions')
     @OnUndefined(404)
-    async getConsumptionsByApartmentUuid(@Param('uuid') uuid: string, @Req() req: Request): Promise<Consumption[]> {
+    async getConsumptionsByApartmentid(@Param('id') id: number, @Req() req: Request): Promise<Consumption[]> {
         LogsUtil.logRequest(req);
-        return await this.apartmentService.getConsumptionsOfApartmentUuid(uuid)
+        return await this.apartmentService.getConsumptionsOfApartmentid(id)
         .catch(() => {
             throw new NotFoundError();
         })
@@ -68,6 +68,21 @@ export class ApartmentController {
         .catch(() => {
             throw new NotFoundError();
         })
+    }
+
+    @Get('/:row/:number/consumptions/:year/:mounth/:day')
+    @OnUndefined(404)
+    async getConsumptionsByDate(@Param('row') row: string, @Param('number') number: string, @Param('year') year: string, @Param('mounth') mounth: string, 
+        @Param('day') day: string, @Req() req: Request): Promise<Consumption[]> {
+            return await this.apartmentService.getConsumptionsByDate(row, number, year, mounth, day);
+    }
+
+    @Get('/:row/:number/consumptions/:year/:mounth/:day/:year1/:mounth1/:day1')
+    @OnUndefined(404)
+    async getConsumptionsByRangeDates(@Param('row') row: string, @Param('number') number: string, @Param('year') year: string, @Param('mounth') mounth: string, 
+        @Param('day') day: string,@Param('year1') year2: string, @Param('mounth1') mounth2: string, 
+        @Param('day1') day2: string, @Req() req: Request): Promise<Consumption[]> {
+            return await this.apartmentService.getConsumptionsByRangeDates(row, number,day,mounth,year,day2,mounth2,year2);
     }
 
     @Get()
