@@ -1,5 +1,5 @@
 import { Request } from 'express'
-import { JsonController, Post, OnUndefined, Body, Req, Param, Delete, Get, BadRequestError, NotFoundError } from 'routing-controllers';
+import { JsonController, Post, OnUndefined, Body, Req, Param, Delete, Get, BadRequestError, NotFoundError, Authorized } from 'routing-controllers';
 import { ConsumptionService } from '../services/consumption.service'
 import { LogsUtil } from '../utils/logs.util';
 import { ConsumptionDTO } from '../dto/consumption.dto';
@@ -20,6 +20,7 @@ export class ConsumptionController {
         })
     }
 
+    @Authorized()
     @Delete('/:id')
     @OnUndefined(201)
     async delete(@Param('id') id: number, @Req() req: Request) {
@@ -30,6 +31,7 @@ export class ConsumptionController {
         })
     }
 
+    @Authorized()
     @Get('/:id')
     @OnUndefined(404)
     async getOneByid(@Param('id') id: number, @Req() req: Request): Promise<Consumption> {
@@ -40,6 +42,7 @@ export class ConsumptionController {
         })
     }
 
+    @Authorized()
     @Get()
     @OnUndefined(404)
     async getAll(@Req() req: Request): Promise<Consumption[]> {

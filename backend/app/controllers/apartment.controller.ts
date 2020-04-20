@@ -1,5 +1,5 @@
 import { Request } from 'express'
-import { JsonController, Post, OnUndefined, Body, Req, Delete, Param, Get, BadRequestError, NotFoundError } from 'routing-controllers';
+import { JsonController, Post, OnUndefined, Body, Req, Delete, Param, Get, BadRequestError, NotFoundError, Authorized } from 'routing-controllers';
 import { ApartmentDTO } from '../dto/apartments.dto';
 import { LogsUtil } from '../utils/logs.util';
 import { Apartment } from '../entities/apartment.entity';
@@ -10,6 +10,8 @@ import { Consumption } from '../entities/consumption.entity';
 @JsonController('/apartments')
 export class ApartmentController {
     constructor(private readonly apartmentService: ApartmentService) {}
+
+    @Authorized()
     @Post()
     @OnUndefined(201)
     async create(@Body() apartmentDto: ApartmentDTO, @Req() req: Request): Promise<void> {
@@ -20,6 +22,7 @@ export class ApartmentController {
         })
     }
 
+    @Authorized()
     @Delete('/:id')
     @OnUndefined(201)
     async delete(@Param('id') id: number, @Req() req: Request) {
@@ -30,6 +33,7 @@ export class ApartmentController {
         })
     }
 
+    @Authorized()
     @Get('/:id')
     @OnUndefined(404)
     async getOneByid(@Param('id') id: number, @Req() req: Request): Promise<Apartment> {
@@ -40,6 +44,7 @@ export class ApartmentController {
         })
     }
 
+    @Authorized()
     @Get('/:row/:number')
     @OnUndefined(404)
     async getApartment(@Param('row') row: string, @Param('number') number: string, @Req() req: Request): Promise<Apartment> {
@@ -50,6 +55,7 @@ export class ApartmentController {
         })
     }
 
+    @Authorized()
     @Get('/:id/consumptions')
     @OnUndefined(404)
     async getConsumptionsByApartmentid(@Param('id') id: number, @Req() req: Request): Promise<Consumption[]> {
@@ -60,6 +66,7 @@ export class ApartmentController {
         })
     }
 
+    @Authorized()
     @Get('/:row/:number/consumptions')
     @OnUndefined(404)
     async getConsumptionsByApartmentName(@Param('row') row: string, @Param('number') number: string, @Req() req: Request): Promise<Consumption[]> {
@@ -70,6 +77,7 @@ export class ApartmentController {
         })
     }
 
+    @Authorized()
     @Get('/:row/:number/consumptions/:year/:mounth/:day')
     @OnUndefined(404)
     async getConsumptionsByDate(@Param('row') row: string, @Param('number') number: string, @Param('year') year: string, @Param('mounth') mounth: string, 
@@ -77,6 +85,7 @@ export class ApartmentController {
             return await this.apartmentService.getConsumptionsByDate(row, number, year, mounth, day);
     }
 
+    @Authorized()
     @Get('/:row/:number/consumptions/:year/:mounth/:day/:year1/:mounth1/:day1')
     @OnUndefined(404)
     async getConsumptionsByRangeDates(@Param('row') row: string, @Param('number') number: string, @Param('year') year: string, @Param('mounth') mounth: string, 
@@ -85,6 +94,7 @@ export class ApartmentController {
             return await this.apartmentService.getConsumptionsByRangeDates(row, number,day,mounth,year,day2,mounth2,year2);
     }
 
+    @Authorized()
     @Get()
     @OnUndefined(404)
     async getAll(@Req() req: Request): Promise<Apartment[]> {
