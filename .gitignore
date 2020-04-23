@@ -69,3 +69,6 @@ build/
 
 # Firebase private key
 ServiceAccountKey.json
+
+# Angular environments
+environments

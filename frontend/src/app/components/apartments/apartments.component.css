@@ -1,0 +1,89 @@
+.list-apartments{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.apartments {
+  margin: 15px;
+}
+
+.options-menu{
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+}
+
+@keyframes moveOne {
+  from {bottom: 2rem; opacity: 0;}
+  to {bottom: 6rem;}
+}
+
+@keyframes moveOneLabel {
+  from {bottom: 2rem; opacity: 0;}
+  to {bottom: 6.5rem;}
+}
+
+@keyframes moveTwo {
+  from {bottom: 2rem; opacity: 0;}
+  to {bottom: 9.5rem;}
+}
+
+@keyframes moveTwoLabel {
+  from {bottom: 2rem; opacity: 0;}
+  to {bottom: 10rem;}
+}
+
+.action-button{
+  position: fixed;
+  right: 2rem;
+  transition-property: opacity;
+}
+
+.label{
+  position: fixed;
+  right: 5rem;
+  left: auto;
+  height: 25px;
+  width: 100px;
+  line-height: 25px;
+  min-height: 25px;
+  vertical-align: top;
+  font-size: 12px;
+  padding: 0 0;
+  margin: 0;
+}
+
+.one{
+  bottom: 6rem;
+  animation: moveOne 0.2s;
+}
+
+.labelone{
+  bottom: 6.5rem;
+  animation: moveOneLabel 0.2s;
+}
+  
+.two{
+  bottom: 9.5rem;
+  animation: moveTwo 0.25s;
+}
+
+.labeltwo {
+  bottom: 10rem;
+  animation: moveTwoLabel 0.25s;
+}
+
+.dialog_scrim {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+}
+  

@@ -1,0 +1,24 @@
+<mat-accordion>
+    <mat-expansion-panel #matExpansionPanel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Filters
+          </mat-panel-title>
+          <mat-panel-description>
+            Seleziona filtri
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" [formControl]="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button mat-button (click)="selectData()" (click)="matExpansionPanel.toggle()">Applica</button>
+
+      </mat-expansion-panel>
+</mat-accordion>
+ 
+
+<div id="chartdiv" style="width: 100%; height: 500px"></div>

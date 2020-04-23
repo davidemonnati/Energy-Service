@@ -1,0 +1,53 @@
+.toolbar {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.menu-toolbar {
+  display: flex;
+  align-content: center;
+}
+
+.main-container {
+    width: auto;
+    height: 100%;
+    margin: 0px;
+  }
+
+.btn-menu {
+  color: white;
+}
+
+.title-lnk {
+  font-size: 25px !important;
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.mat-drawer {
+    width: 200px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.avatar {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 8px 0 0;
+  border-radius: 50%;
+  font-size: 17px;
+  font-weight: 500;
+  text-align: center;
+  color: #FFF;
+  outline: none;
+  cursor: pointer;
+}
