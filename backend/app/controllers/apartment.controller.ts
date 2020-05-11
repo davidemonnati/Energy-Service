@@ -33,7 +33,6 @@ export class ApartmentController {
         })
     }
 
-    @Authorized()
     @Get('/:id')
     @OnUndefined(404)
     async getOneByid(@Param('id') id: number, @Req() req: Request): Promise<Apartment> {
@@ -43,8 +42,7 @@ export class ApartmentController {
             throw new NotFoundError();
         })
     }
-
-    @Authorized()
+    
     @Get('/:row/:number')
     @OnUndefined(404)
     async getApartment(@Param('row') row: string, @Param('number') number: string, @Req() req: Request): Promise<Apartment> {
