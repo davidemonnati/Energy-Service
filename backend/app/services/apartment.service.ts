@@ -50,7 +50,7 @@ export class ApartmentService {
             const consumptionsOfApartment = await this.consumptionRepository.getOneByid(consumption.id);
             consumptions.push(consumptionsOfApartment);
         }
-        consumptions.sort((a,b) => b.datetime > a.datetime ? -1 : 1);
+        consumptions.sort((a,b) => this.toTimestamp(b.datetime) > this.toTimestamp(a.datetime) ? -1 : 1);
 
         return await consumptions;
     }
@@ -65,7 +65,7 @@ export class ApartmentService {
                 consumptions.push(consumptionsOfApartment);
             }
         }
-        consumptions.sort((a,b) => b.datetime > a.datetime ? -1 : 1);
+        consumptions.sort((a,b) => this.toTimestamp(b.datetime) > this.toTimestamp(a.datetime) ? -1 : 1);
 
         return await consumptions;
     }
@@ -88,13 +88,18 @@ export class ApartmentService {
                 }
             }
         }
-        consumptions.sort((a,b) => b.datetime > a.datetime ? -1 : 1);
+        consumptions.sort((a,b) => this.toTimestamp(b.datetime) > this.toTimestamp(a.datetime) ? -1 : 1);
 
         return await consumptions;
     }
 
     async getAll(): Promise<Apartment[]> {
         return await this.apartmentRepository.getAll();
+    }
+
+    private toTimestamp(date: any){
+        var timestamp = Date.parse(date);
+        return timestamp/1000;
     }
 
     private getDateString(day: string, mounth: string, year: string): string {
