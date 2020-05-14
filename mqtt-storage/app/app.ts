@@ -19,11 +19,21 @@ client.on('message', function (topic, message){
   var dateTime = consumptionArray[0].split('T');
   consumptionArray[0] = dateTime[0] + ' ' + dateTime[1];
 
-  getApartment(backendUrl + '/apartments/' + topic)
-  .then( function(data) {
-    saveData(consumptionArray, data);
-  })
+  var onlyDate = dateTime[0].split('-');
+  var today = new Date();
+
+  console.log(parseInt(onlyDate[0]));
+  console.log(today.getFullYear());
+
+  if(parseInt(onlyDate[0]) == today.getFullYear())
+  {
+    getApartment(backendUrl + '/apartments/' + topic)
+    .then( function(data) {
+      saveData(consumptionArray, data);
+    })
+  }
 })
+
 
 async function getApartment(url: string): Promise<String> {
   var options = {
