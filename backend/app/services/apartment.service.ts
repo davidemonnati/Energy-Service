@@ -68,7 +68,8 @@ export class ApartmentService {
         }*/
         consumptions = await getRepository(Consumption)
                 .createQueryBuilder("consumption")
-                .where("consumption.datetime like :datetimes", {datetimes: datetime + '%'})
+                .where("consumption.apartment.id = :apart", {apart: apartment.id})
+            .andWhere("consumption.datetime like :datetimes", {datetimes: datetime + '%'})
                 .getMany();
         consumptions.sort((a,b) => this.toTimestamp(b.datetime) > this.toTimestamp(a.datetime) ? -1 : 1);
 
@@ -90,8 +91,11 @@ export class ApartmentService {
             
             consumptions = consumptions.concat(await getRepository(Consumption)
             .createQueryBuilder("consumption")
-            .where("consumption.datetime like :datetimes", {datetimes: dateString + '%'})
+            .where("consumption.apartment.id = :apart", {apart: apartment.id})
+            .andWhere("consumption.datetime like :datetimes", {datetimes: dateString + '%'})
             .getMany());
+
+
             /*var dateString = this.getDateString(dates[i].getDate().toString(), (dates[i].getMonth() + 1).toString(),
                 dates[i].getFullYear().toString());
 
