@@ -20,7 +20,7 @@ export class GraphService {
   initializeGraph(): void {
     this.chart = am4core.create('chartdiv', am4charts.XYChart);
     this.chart.paddingRight = 20;
-    this.chart.dateFormatter.inputDateFormat = 'dd/M/yyyy H:m:s';
+    this.chart.dateFormatter.inputDateFormat = 'yyyy-MMM-dd HH:mm:ss';
   }
 
   loadData(url: string): void {
@@ -33,10 +33,9 @@ export class GraphService {
 
   setDateAxis(): void {
     const dateAxis = this.chart.xAxes.push(new am4charts.DateAxis());
-    dateAxis.tooltipDateFormat = 'HH:mm:ss, d MMM yyyy';
-    dateAxis.renderer.grid.template.location = 0.5;
-    dateAxis.startLocation = 0.5;
-    dateAxis.endLocation = 0.5;
+    dateAxis.adapter.add('getTooltipText', function(text, target) {
+      return '';
+    });
   }
 
   setValueAxis(): void {
@@ -65,7 +64,7 @@ export class GraphService {
     series.dataFields.dateX = 'datetime';
     series.dataFields.valueY = 'value';
     series.showOnInit = false;
-    series.tooltipText = '{valueY.value}';
+    series.tooltipText = '{datetime}: [bold]{valueY.value}';
     return series;
   }
 

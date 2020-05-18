@@ -45,32 +45,19 @@ export class ApartmentService {
 
     async getConsumptionsOfApartmentName(row: string, number: string): Promise<Consumption[]> {
         let apartment = await this.apartmentRepository.getApartment(row, number);
-        /*let consumptions:Consumption[] = new Array();
-        for(let consumption of apartment.consumptions)
-        {
-            const consumptionsOfApartment = await this.consumptionRepository.getOneByid(consumption.id);
-            consumptions.push(consumptionsOfApartment);
-        }
-        //consumptions.sort((a,b) => this.toTimestamp(b.datetime) > this.toTimestamp(a.datetime) ? -1 : 1);*/
-
-        return await apartment.consumptions;
+        return await apartment.consumptions.sort((a,b) => this.toTimestamp(b.datetime) > this.toTimestamp(a.datetime) ? -1 : 1);
     }
 
     async getConsumptionsByDate(row: string, number: string, year: string, mounth: string, day: string): Promise<Consumption[]> {
         let apartment = await this.apartmentRepository.getApartment(row, number);
         let consumptions:Consumption[] = new Array();
         let datetime = this.getDateString(day, mounth, year);
-        /*for(let consumption of apartment.consumptions) {
-            //const consumptionsOfApartment = await this.consumptionRepository.getOneByid(consumption.id);
-            if(consumption.datetime.includes(datetime)){
-                consumptions.push(consumption);
-            }
-        }*/
+
         consumptions = await getRepository(Consumption)
-                .createQueryBuilder("consumption")
-                .where("consumption.apartment.id = :apart", {apart: apartment.id})
+            .createQueryBuilder("consumption")
+            .where("consumption.apartment.id = :apart", {apart: apartment.id})
             .andWhere("consumption.datetime like :datetimes", {datetimes: datetime + '%'})
-                .getMany();
+            .getMany();
         consumptions.sort((a,b) => this.toTimestamp(b.datetime) > this.toTimestamp(a.datetime) ? -1 : 1);
 
         return await consumptions;
@@ -84,7 +71,6 @@ export class ApartmentService {
         var dates: Date[] = this.getDateRange(datetime,datetime2);
 
         for(let i=0; i<dates.length;i++) {
-            
             var dateString = this.getDateString(dates[i].getDate().toString(), (dates[i].getMonth() + 1).toString(),
                 dates[i].getFullYear().toString());
                 console.log(dateString);
@@ -94,22 +80,8 @@ export class ApartmentService {
             .where("consumption.apartment.id = :apart", {apart: apartment.id})
             .andWhere("consumption.datetime like :datetimes", {datetimes: dateString + '%'})
             .getMany());
-
-
-            /*var dateString = this.getDateString(dates[i].getDate().toString(), (dates[i].getMonth() + 1).toString(),
-                dates[i].getFullYear().toString());
-
-            for(let consumption of apartment.consumptions){
-                //const consumptionsOfApartment = await this.consumptionRepository.getOneByid(consumption.id);
-                if(consumption.datetime.includes(dateString)){
-                    consumptions.push(consumption);
-                }
-            }*/
         }
         consumptions.sort((a,b) => this.toTimestamp(b.datetime) > this.toTimestamp(a.datetime) ? -1 : 1);
-
-        
-
         return await consumptions;
     }
 
