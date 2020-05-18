@@ -14,7 +14,9 @@ export class GraphComponent implements OnInit {
   number: number;
 
   private sub: any;
-  public date = new FormControl(new Date());
+  public dateSingle = new FormControl(new Date());
+  public dateInterval1 = new FormControl(new Date());
+  public dateInterval2 = new FormControl(new Date());
   private url: string;
 
   constructor(
@@ -32,12 +34,25 @@ export class GraphComponent implements OnInit {
     this.showGraph(this.url);
   }
 
-  selectData(): void {
-    const day = ('0' + (this.date.value.getDate())).slice(-2);
-    const month = ('0' + (this.date.value.getUTCMonth() + 1)).slice(-2);
-    const year = this.date.value.getFullYear();
+  selectDate(): void {
+    const day = ('0' + (this.dateSingle.value.getDate())).slice(-2);
+    const month = ('0' + (this.dateSingle.value.getMonth()+1)).slice(-2);
+    const year = this.dateSingle.value.getFullYear();
 
     const url = this.url + year + '/' + month + '/' + day ;
+    this.showGraph(url);
+  }
+
+  selectRangeDate(): void {
+    const day1 = ('0' + (this.dateInterval1.value.getDate())).slice(-2);
+    const month1 = ('0' + (this.dateInterval1.value.getMonth()+1)).slice(-2);
+    const year1 = this.dateInterval1.value.getFullYear();
+
+    const day2 = ('0' + (this.dateInterval2.value.getDate())).slice(-2);
+    const month2 = ('0' + (this.dateInterval2.value.getMonth()+1)).slice(-2);
+    const year2 = this.dateInterval2.value.getFullYear();
+
+    const url = this.url + year1 + '/' + month1 + '/' + day1 + '/'+ year2 + '/' + month2 + '/' + day2;
     this.showGraph(url);
   }
 
