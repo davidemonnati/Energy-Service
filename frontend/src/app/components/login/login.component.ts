@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/providers/auth/auth.service.ts.service';
 import { Router } from '@angular/router';
@@ -8,8 +8,9 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   loginForm: FormGroup;
+  error = false;
 
   constructor(
     private authService: AuthService,
@@ -21,18 +22,25 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  checkIfEmpty(email: string, password: string): boolean {
+    return (!email || !password)? true: false;
   }
 
   async login(): Promise<any> {
     const email = this.loginForm.controls['email'].value;
     const password = this.loginForm.controls['password'].value;
+    this.error = this.checkIfEmpty(email, password);
 
-    const user: firebase.auth.UserCredential = await this.authService.signInWithEmailAndPassword(email, password);
+    const user = await this.authService.signInWithEmailAndPassword(email, password)
+    .then((login) => {
+      return login;
+    }).catch((err) => {
+      this.error = true;
+      console.log('Username o password errati');
+    })
 
     if (user) {
       this.router.navigate(['/']);
     }
   }
-
 }

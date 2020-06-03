@@ -95,9 +95,6 @@ export class ApartmentService {
     }
 
     private getDateString(day: string, mounth: string, year: string): string {
-        day = ('0' + day).slice(-2)
-        mounth = ('0' + mounth).slice(-2);
-        
         return year + '-' + mounth + '-' + day;
     }
 
