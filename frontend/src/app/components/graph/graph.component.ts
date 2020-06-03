@@ -35,8 +35,8 @@ export class GraphComponent implements OnInit {
   }
 
   selectDate(): void {
-    const day = ('0' + (this.dateSingle.value.getDate())).slice(-2);
-    const month = ('0' + (this.dateSingle.value.getMonth()+1)).slice(-2);
+    const day = this.dateSingle.value.getDate();
+    const month = this.dateSingle.value.getMonth() + 1;
     const year = this.dateSingle.value.getFullYear();
 
     const url = this.url + year + '/' + month + '/' + day ;
@@ -44,12 +44,12 @@ export class GraphComponent implements OnInit {
   }
 
   selectRangeDate(): void {
-    const day1 = ('0' + (this.dateInterval1.value.getDate())).slice(-2);
-    const month1 = ('0' + (this.dateInterval1.value.getMonth()+1)).slice(-2);
+    const day1 = this.dateInterval1.value.getDate();
+    const month1 = this.dateInterval1.value.getMonth() + 1;
     const year1 = this.dateInterval1.value.getFullYear();
 
-    const day2 = ('0' + (this.dateInterval2.value.getDate())).slice(-2);
-    const month2 = ('0' + (this.dateInterval2.value.getMonth()+1)).slice(-2);
+    const day2 = this.dateInterval2.value.getDate();
+    const month2 = this.dateInterval2.value.getMonth() + 1;
     const year2 = this.dateInterval2.value.getFullYear();
 
     const url = this.url + year1 + '/' + month1 + '/' + day1 + '/'+ year2 + '/' + month2 + '/' + day2;
