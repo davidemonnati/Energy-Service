@@ -16,11 +16,19 @@ client.subscribe('#');
 
 client.on('message', function (topic, message){
   var consumptionArray = String(message).split('_');
+  var dateTime = consumptionArray[0].split('T');
+  consumptionArray[0] = dateTime[0] + ' ' + dateTime[1];
 
-  getApartment(backendUrl + '/apartments/' + topic)
-  .then( function(data) {
-    saveData(consumptionArray, data);
-  })
+  var onlyYear = dateTime[0].split('-');
+  var today = new Date();
+
+  if(parseInt(onlyYear[0]) == today.getFullYear())
+  {
+    getApartment(backendUrl + '/apartments/' + topic)
+    .then(function(data) {
+      saveData(consumptionArray, data);
+    })
+  }
 })
 
 async function getApartment(url: string): Promise<String> {
@@ -32,8 +40,8 @@ async function getApartment(url: string): Promise<String> {
 
 async function saveData(consumptionArray: string[], idApartment: String){
   var JSONData = {
-    'datetime': consumptionArray[0] + ' ' + consumptionArray[1],
-    'value': consumptionArray[2],
+    'datetime': consumptionArray[0],
+    'value': consumptionArray[1],
     'apartment': idApartment
   }
   await request.post({

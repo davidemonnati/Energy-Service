@@ -1,0 +1,18 @@
+ .footer {
+   background-color: #212529;
+   color: white;
+   text-align: center;
+   font-size: 14;
+   height: auto;
+   padding: 2rem;
+}
+
+a {
+  color: white;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: white;
+  text-decoration: underline;
+}

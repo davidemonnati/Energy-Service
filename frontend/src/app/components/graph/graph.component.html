@@ -1,0 +1,54 @@
+<mat-accordion>
+    <mat-expansion-panel #matDatePanel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Filtra per data
+          </mat-panel-title>
+          <mat-panel-description>
+            Seleziona data
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="pickersingle" [formControl]="dateSingle">
+            <mat-datepicker-toggle matSuffix [for]="pickersingle"></mat-datepicker-toggle>
+            <mat-datepicker #pickersingle></mat-datepicker>
+        </mat-form-field>
+        <button mat-button (click)="selectDate()" (click)="matDatePanel.toggle()">Applica</button>
+
+      </mat-expansion-panel>
+
+
+      <mat-expansion-panel #matIntervalDatePanel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Filtra per periodo
+          </mat-panel-title>
+          <mat-panel-description>
+            Seleziona intervallo date
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field style="padding-right: 10px;">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="pickermulti1" [formControl]="dateInterval1">
+            <mat-datepicker-toggle matSuffix [for]="pickermulti1"></mat-datepicker-toggle>
+            <mat-datepicker #pickermulti1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="pickermulti2" [formControl]="dateInterval2">
+          <mat-datepicker-toggle matSuffix [for]="pickermulti2"></mat-datepicker-toggle>
+          <mat-datepicker #pickermulti2></mat-datepicker>
+      </mat-form-field>
+
+        <button mat-button (click)="selectRangeDate()" (click)="matIntervalDatePanel.toggle()">Applica</button>
+
+      </mat-expansion-panel>
+      
+</mat-accordion>
+ 
+
+<div id="chartdiv" style="width: 100%; height: 500px"></div>

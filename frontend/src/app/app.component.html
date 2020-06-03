@@ -1,0 +1,45 @@
+<mat-toolbar class="toolbar" color="primary">
+  <button mat-icon-button (click)="drawer.toggle()" fxShow="true" fxHide.gt-sm>
+    <mat-icon *ngIf="opened">close</mat-icon>
+    <mat-icon *ngIf="!opened">menu</mat-icon>
+  </button>
+
+  <span class="title-lnk" [routerLink]="['/']" routerLinkActive="router-link-active" (click)="opened = false">Energy Service</span>
+  <div class="menu-toolbar" fxShow="true" fxHide.lt-md>
+    <button class="btn-menu" mat-button [routerLink]="['/apartments']" routerLinkActive="router-link-active" >Appartamenti</button>
+  </div>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="spacer"></span>
+  <button mat-button [routerLink]="['/login']" routerLinkActive="router-link-active" *ngIf="!authService.isLoggedIn()" >Login</button>
+
+  <div layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="start center" *ngIf="authService.isLoggedIn()">
+    <img class="profile-image avatar huge" src="{{ getProfileImage() }}" [matMenuTriggerFor]="userMenu">
+
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item [routerLink]="['/']" routerLinkActive="router-link-active" (click)="authService.logout()">
+        <mat-icon>lock</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
+
+  <span> <!-- Right Aligned Text --> </span>
+</mat-toolbar>
+
+
+<mat-drawer-container class="main-container" >
+  <mat-drawer #drawer [(opened)]="opened" mode="side" class="side" close>
+    <mat-nav-list>
+      <a [routerLink]="['/apartments']" routerLinkActive="router-link-active">
+        <mat-list-item (click)="opened = false">Appartamenti</mat-list-item>
+      </a>
+  </mat-nav-list>
+
+  </mat-drawer>
+  <mat-drawer-content>
+  <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+<app-footer></app-footer>
