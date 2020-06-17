@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -20,17 +20,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSelectModule } from '@angular/material/select';
+
 import { GraphComponent } from './components/graph/graph.component';
 import { ApartmentsComponent } from './components/apartments/apartments.component';
 import { LoginComponent } from './components/login/login.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ComparisonComponent } from './components/comparison/comparison.component';
+import { GraphscompareComponent } from './components/graphscompare/graphscompare.component';
+import { HomeComponent } from './components/home/home.component';
+import { AuthService } from './providers/auth/auth.service.ts.service';
+import { AuthHttpInterceptorProvider } from './providers/auth/AuthHttpInterceptor/auth-http-interceptor';
 
 import { AngularFireModule } from 'angularfire2';
-import { environment } from 'src/environments/environment';
-import { AuthService } from './providers/auth/auth.service.ts.service';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AuthHttpInterceptorProvider } from './providers/auth/AuthHttpInterceptor/auth-http-interceptor';
-import { FooterComponent } from './components/footer/footer.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,10 @@ import { FooterComponent } from './components/footer/footer.component';
     ApartmentsComponent,
     LoginComponent,
     UnauthorizedComponent,
-    FooterComponent
+    FooterComponent,
+    ComparisonComponent,
+    GraphscompareComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +68,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MatExpansionModule,
     MatGridListModule,
     FlexLayoutModule,
+    MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),

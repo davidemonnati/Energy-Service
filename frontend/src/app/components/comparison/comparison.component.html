@@ -1,0 +1,20 @@
+<mat-card>
+    <mat-card-title>Confronta </mat-card-title>
+    <mat-card-content>
+        <mat-form-field>
+            <mat-label>Select first apartment</mat-label>
+            <mat-select [(ngModel)]="valueFirst">
+                <mat-option *ngFor="let app of apartments" [value]="app.row + '/' + app.number">{{ app.row }} {{ app.number }}</mat-option>  
+            </mat-select>
+          </mat-form-field>
+          
+          <mat-form-field>
+              <mat-label>Select second apartment</mat-label>
+              <mat-select [(ngModel)]="valueSecond">
+                  <mat-option *ngFor="let app of apartments" [value]="app.row + '/' + app.number">{{ app.row }} {{ app.number }}</mat-option>  
+              </mat-select>
+          </mat-form-field>
+          <button mat-button [routerLink]="['/graphcompare', valueFirst, valueSecond ]" routerLinkActive="router-link-active" >Confronta</button>
+    </mat-card-content>
+</mat-card>
+

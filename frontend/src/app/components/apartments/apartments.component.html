@@ -1,7 +1,9 @@
 <div class="list-apartments">
   <a *ngFor="let app of apartments">
-    <mat-card class="apartments" [routerLink]="['/graph', app.row, app.number]" routerLinkActive="router-link-active" >
-      <mat-card-title>{{ app.row }} {{ app.number }} </mat-card-title>
+    <mat-card class="apartments" [routerLink]="['/graph', app.row, app.number]" routerLinkActive="router-link-active">
+      <mat-card-header>
+        <mat-card-title>{{ app.row }} {{ app.number }} </mat-card-title>
+      </mat-card-header>
       <mat-card-content class="content_apartments">{{ app.description }}</mat-card-content>
     </mat-card>
   </a>
