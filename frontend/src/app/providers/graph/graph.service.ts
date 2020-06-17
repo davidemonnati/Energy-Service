@@ -12,73 +12,74 @@ am4core.useTheme(am4themes_animated);
 export class GraphService {
 
   private chart;
+  private comparison;
 
   constructor(
     private consumptionService: ConsumptionsService
   ) { }
 
-  initializeGraph(): void {
+  createAxisAndSeries(datetime: string, value: string, color: string) {
+    const valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis());
+    let series = new am4charts.LineSeries();
+    series.dataFields.dateX = datetime;
+    series.dataFields.valueY = value;
+    series.fill = am4core.color(color);
+    series.showOnInit = false;
+
+    series.tooltipText = '{' + datetime + '}: [bold]{valueY.value}';
+    series = this.chart.series.push(series);
+  }
+
+  createSecondLine(url2: string){
+    this.consumptionService.getConsumption(url2)
+    .subscribe( data => {
+      const changedKey = data.map(({ id, datetime:datetime2, value:value2 }) => ({
+        id,
+        datetime2,
+        value2
+      }));
+
+      this.chart.addData(changedKey);
+    });
+
+    this.createAxisAndSeries('datetime2', 'value2', 'red');
+  }
+
+  getChart(url: string, url2?: string): any {
+    if(url2 !== undefined)
+      this.comparison = true;
+
     this.chart = am4core.create('chartdiv', am4charts.XYChart);
     this.chart.paddingRight = 20;
     this.chart.dateFormatter.inputDateFormat = 'yyyy-MMM-dd HH:mm:ss';
-  }
 
-  loadData(url: string): void {
     this.consumptionService.getConsumption(url)
     .subscribe( data => {
       this.chart.data = data;
     });
-    this.chart.dataSource.parser = new am4core.JSONParser();
-  }
 
-  setDateAxis(): void {
+    this.chart.dataSource.parser = new am4core.JSONParser();
+
     const dateAxis = this.chart.xAxes.push(new am4charts.DateAxis());
     dateAxis.adapter.add('getTooltipText', function(text, target) {
       return '';
     });
-  }
 
-  setValueAxis(): void {
-    const valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.tooltip.disabled = true;
-    valueAxis.renderer.minWidth = 35;
-  }
+    if(this.comparison)
+      this.createSecondLine(url2);
 
-  setScrollbars(series: any): void {
+    this.createAxisAndSeries('datetime', 'value', 'green');
+
     const scrollbarX = new am4charts.XYChartScrollbar();
-    scrollbarX.series.push(series);
     this.chart.scrollbarX = scrollbarX;
 
     const scrollbarY = new am4charts.XYChartScrollbar();
-    scrollbarY.series.push(series);
     this.chart.scrollbarY = scrollbarY;
-  }
 
-  enableExportMenu(): void {
+    this.chart.cursor = new am4charts.XYCursor();
     this.chart.exporting.menu = new am4core.ExportMenu();
     this.chart.exporting.filePrefix = 'data';
-  }
 
-  setSeriesData(): any {
-    const series = this.chart.series.push(new am4charts.LineSeries());
-    series.dataFields.dateX = 'datetime';
-    series.dataFields.valueY = 'value';
-    series.showOnInit = false;
-    series.tooltipText = '{datetime}: [bold]{valueY.value}';
-    return series;
-  }
-
-  getChart(url: string): any {
-    this.initializeGraph();
-    this.loadData(url);
-    this.setDateAxis();
-    this.setValueAxis();
-
-    const series = this.setSeriesData();
-    this.chart.cursor = new am4charts.XYCursor();
-
-    this.setScrollbars(series);
-    this.enableExportMenu();
     return this.chart;
   }
 }

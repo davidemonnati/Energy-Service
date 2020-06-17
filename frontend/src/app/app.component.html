@@ -7,6 +7,7 @@
   <span class="title-lnk" [routerLink]="['/']" routerLinkActive="router-link-active" (click)="opened = false">Energy Service</span>
   <div class="menu-toolbar" fxShow="true" fxHide.lt-md>
     <button class="btn-menu" mat-button [routerLink]="['/apartments']" routerLinkActive="router-link-active" >Appartamenti</button>
+    <button class="btn-menu" mat-button [routerLink]="['/comparison']" routerLinkActive="router-link-active" >Confronto</button>
   </div>
 
   <!-- This fills the remaining space of the current row -->
@@ -33,6 +34,9 @@
     <mat-nav-list>
       <a [routerLink]="['/apartments']" routerLinkActive="router-link-active">
         <mat-list-item (click)="opened = false">Appartamenti</mat-list-item>
+      </a>
+      <a [routerLink]="['/comparison']" routerLinkActive="router-link-active">
+        <mat-list-item (click)="opened = false">Confronto</mat-list-item>
       </a>
   </mat-nav-list>
 

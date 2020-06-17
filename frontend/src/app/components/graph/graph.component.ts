@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { environment } from 'src/environments/environment.prod';
 import { GraphService } from 'src/app/providers/graph/graph.service';
+import { CompareService } from 'src/app/providers/compare/compare.service';
 
 @Component({
   selector: 'app-graph',
@@ -15,14 +16,15 @@ export class GraphComponent implements OnInit {
 
   private sub: any;
   public dateSingle = new FormControl(new Date());
-  public dateInterval1 = new FormControl(new Date());
-  public dateInterval2 = new FormControl(new Date());
+  public startdate = new FormControl(new Date());
+  public enddate = new FormControl(new Date());
   private url: string;
 
   constructor(
     private zone: NgZone,
     private route: ActivatedRoute,
-    private graphService: GraphService
+    private graphService: GraphService,
+    private compareService: CompareService
   ) {};
 
   ngOnInit() {
@@ -31,29 +33,25 @@ export class GraphComponent implements OnInit {
        this.number = params['number'];
     });
     this.url = environment.BACKEND_ADDR + '/apartments/' + this.row  + '/' + this.number + '/consumptions/';
-    this.showGraph(this.url);
+    this.showGraph(this.url+this.getCurrentDate());
+  }
+
+  getCurrentDate(): string {
+    const dateTime = new Date();
+    const today = dateTime.getFullYear() + '/' + dateTime.getMonth() +1 + '/' + dateTime.getDate();
+    dateTime.setDate(dateTime.getDate()-1);
+
+    return dateTime.getFullYear() + '/' + dateTime.getMonth() +1 + '/' + dateTime.getDate() + '/' + today;
   }
 
   selectDate(): void {
-    const day = this.dateSingle.value.getDate();
-    const month = this.dateSingle.value.getMonth() + 1;
-    const year = this.dateSingle.value.getFullYear();
-
-    const url = this.url + year + '/' + month + '/' + day ;
-    this.showGraph(url);
+    const urlArray = this.compareService.selectDate(this.dateSingle, this.url);
+    this.showGraph(urlArray[0]);
   }
 
   selectRangeDate(): void {
-    const day1 = this.dateInterval1.value.getDate();
-    const month1 = this.dateInterval1.value.getMonth() + 1;
-    const year1 = this.dateInterval1.value.getFullYear();
-
-    const day2 = this.dateInterval2.value.getDate();
-    const month2 = this.dateInterval2.value.getMonth() + 1;
-    const year2 = this.dateInterval2.value.getFullYear();
-
-    const url = this.url + year1 + '/' + month1 + '/' + day1 + '/'+ year2 + '/' + month2 + '/' + day2;
-    this.showGraph(url);
+    const urlArray = this.compareService.selectRangeDate(this.startdate, this.enddate, this.url);
+    this.showGraph(urlArray[0]);
   }
 
   showGraph(url: string): void {

@@ -5,12 +5,19 @@ import { ApartmentsComponent } from './components/apartments/apartments.componen
 import { LoginComponent } from './components/login/login.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { AuthGuardService } from './providers/auth/guard/auth-guard.service';
+import { ComparisonComponent } from './components/comparison/comparison.component';
+import { GraphscompareComponent } from './components/graphscompare/graphscompare.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 const routes: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'graph/:row/:number', component: GraphComponent, pathMatch: 'full'},
-  {path: 'graph', component: GraphComponent, canActivate: [AuthGuardService], pathMatch: 'full'}, // AAAAAAAAAAAAAAAA
+  {path: 'graph', component: GraphComponent, canActivate: [AuthGuardService]}, // AAAAAAAAAAAAAAAA
   {path: 'apartments', component: ApartmentsComponent, canActivate: [AuthGuardService]},
+  {path: 'comparison', component: ComparisonComponent, canActivate: [AuthGuardService]},
+  {path: 'graphcompare/:valuefirst/:valuesecond', component: GraphscompareComponent, pathMatch: 'full'},
+  {path: 'graphcompare', component: GraphscompareComponent, canActivate: [AuthGuardService]},
   {path: 'login', component: LoginComponent},
   {path: '401', component: UnauthorizedComponent}
 ];
