@@ -1,7 +1,6 @@
 <mat-toolbar class="toolbar" color="primary">
   <button mat-icon-button (click)="drawer.toggle()" fxShow="true" fxHide.gt-sm>
-    <mat-icon *ngIf="opened">close</mat-icon>
-    <mat-icon *ngIf="!opened">menu</mat-icon>
+    <mat-icon>{{ opened ? 'close' : 'menu' }}</mat-icon>
   </button>
 
   <span class="title-lnk" [routerLink]="['/']" routerLinkActive="router-link-active" (click)="opened = false">Energy Service</span>

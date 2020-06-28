@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
   error = false;
+  visible = false;
 
   constructor(
     private authService: AuthService,

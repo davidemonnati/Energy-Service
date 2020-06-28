@@ -36,6 +36,7 @@ import { AuthHttpInterceptorProvider } from './providers/auth/AuthHttpIntercepto
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from 'src/environments/environment';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { environment } from 'src/environments/environment';
     FooterComponent,
     ComparisonComponent,
     GraphscompareComponent,
-    HomeComponent
+    HomeComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,

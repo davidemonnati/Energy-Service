@@ -8,6 +8,7 @@ import { AuthGuardService } from './providers/auth/guard/auth-guard.service';
 import { ComparisonComponent } from './components/comparison/comparison.component';
 import { GraphscompareComponent } from './components/graphscompare/graphscompare.component';
 import { HomeComponent } from './components/home/home.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'graphcompare/:valuefirst/:valuesecond', component: GraphscompareComponent, pathMatch: 'full'},
   {path: 'graphcompare', component: GraphscompareComponent, canActivate: [AuthGuardService]},
   {path: 'login', component: LoginComponent},
-  {path: '401', component: UnauthorizedComponent}
+  {path: '401', component: UnauthorizedComponent},
+  {path: '**', component: NotfoundComponent}
 ];
 
 @NgModule({
