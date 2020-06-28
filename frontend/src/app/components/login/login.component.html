@@ -1,15 +1,18 @@
 <mat-card>
     <mat-card-title>Login </mat-card-title>
     <mat-card-content>
-        <form action="" method="" [formGroup]="loginForm" (ngSubmit)="login()">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
             <p>
                 <mat-form-field>
-                    <input type="text" matInput placeholder="email" formControlName="email">
+                    <mat-label>Email</mat-label>
+                    <input type="text" matInput placeholder="name@example.com" formControlName="email">
                 </mat-form-field>
             </p>
             <p>
                 <mat-form-field>
-                  <input type="password" matInput placeholder="Password" formControlName="password">
+                    <mat-label>Password</mat-label>
+                    <input [type]="visible ? 'text' : 'password'" matInput formControlName="password">
+                    <mat-icon matSuffix (click)="visible = !visible">{{ visible ? 'visibility' : 'visibility_off' }}</mat-icon>
                 </mat-form-field>
             </p>
 
