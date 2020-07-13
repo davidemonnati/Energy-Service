@@ -33,6 +33,17 @@ export class ApartmentController {
         })
     }
 
+    @Authorized()
+    @Delete('/:row/:number')
+    @OnUndefined(201)
+    async deleteApartment(@Param('row') row: string, @Param('number') number: string, @Req() req: Request) {
+        LogsUtil.logRequest(req);
+        await this.apartmentService.deleteByRowNumber(row, number)
+        .catch(() => {
+            throw new BadRequestError();
+        })
+    }
+
     @Get('/:id')
     @OnUndefined(404)
     async getOneByid(@Param('id') id: number, @Req() req: Request): Promise<Apartment> {
