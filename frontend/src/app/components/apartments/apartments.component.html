@@ -2,24 +2,21 @@
   <a *ngFor="let app of apartments">
     <mat-card class="apartments" [routerLink]="['/graph', app.row, app.number]" routerLinkActive="router-link-active">
       <mat-card-header>
-        <mat-card-title>{{ app.row }} {{ app.number }} </mat-card-title>
+        <mat-card-title>{{ app.row }} {{ app.number }}</mat-card-title>
       </mat-card-header>
       <mat-card-content class="content_apartments">{{ app.description }}</mat-card-content>
     </mat-card>
   </a>
 </div>
 
-<div class="dialog_scrim" *ngIf="openOptions"></div>
-
 <button class="options-menu" mat-fab color="basic" (click)="clickOptionsButton()">
-  <mat-icon aria-hidden="false" *ngIf="!openOptions"> menu</mat-icon>
-  <mat-icon aria-hidden="false" *ngIf="openOptions"> close</mat-icon>
+  <mat-icon aria-hidden="false">{{ openOptions? 'close': 'menu'}}</mat-icon>
 </button>
 
 <button mat-mini-fab color="basic" *ngIf="openOptions" class="action-button one mat-elevation-z8">
-  <mat-icon>home</mat-icon>
+  <mat-icon (click)="openDialog()">home</mat-icon>
 </button>
 
 <button mat-raised-button color="basic" *ngIf="openOptions" class="label labelone mat-elevation-z8">
-  <span>Add Home</span>
+  <span (click)="openDialog()">Add Home</span>
 </button>

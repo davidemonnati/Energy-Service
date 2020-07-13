@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApartmentsService } from 'src/app/providers/apartments/apartments.service';
 import { Apartment } from 'src/app/models/apartments';
+import { MatDialog } from '@angular/material/dialog';
+import { AddHomeComponent } from './add-home/add-home.component';
 
 @Component({
   selector: 'app-apartments',
@@ -11,17 +13,30 @@ export class ApartmentsComponent implements OnInit {
 
   public apartments = [];
   public openOptions = false;
+  private row: string;
+  private number: string;
+  private description: string;
 
   constructor(
-    private apartmentService: ApartmentsService
+    private apartmentService: ApartmentsService,
+    public dialog: MatDialog
   ) { }
 
   async ngOnInit() {
     this.getApartments();
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.getApartments() });
   }
 
   clickOptionsButton() {
     this.openOptions = !this.openOptions;
+  }
+
+  openDialog() {
+    this.openOptions = false;
+    this.dialog.open(AddHomeComponent, {
+      data: {row: this.row, number: this.number, description: this.description}
+    });
   }
 
   getApartments(): void {
