@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>New Apartment</h2>
+<mat-dialog-content class="apartment-data" [formGroup]="form">
+  <mat-form-field style="width: 30px;">
+    <mat-label>Row*</mat-label>
+    <input autocomplete="off" matInput type="text" maxlength="1" formControlName="row">
+  </mat-form-field>/
+  <mat-form-field>
+    <mat-label>Number*</mat-label>
+    <input matInput autocomplete="off" type="text" formControlName="number">
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field> <br>
+  <mat-form-field class="description-area">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+  <p class="error" *ngIf="error==true"> I campi contrassegnati con * sono obbligatori.</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button cdkFocusInitial (click)="createApartment()">Add</button>
+</mat-dialog-actions>

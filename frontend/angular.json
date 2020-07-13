@@ -27,7 +27,29 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "angularfire2",
+              "angularfire2/auth",
+              "@firebase/app",
+              "firebase/app",
+              "css-element-queries/src/ResizeSensor",
+              "xlsx",
+              "core-js/modules/es.reflect.delete-property",
+              "core-js/modules/es.object.get-own-property-descriptors",
+              "core-js/modules/es.reflect.construct",
+              "core-js/modules/es.array.includes",
+              "core-js/modules/es.reflect.apply",
+              "core-js/modules/es.array.reverse",
+              "core-js/modules/es.reflect.get-prototype-of",
+              "raf",
+              "@babel/runtime/helpers/slicedToArray",
+              "@babel/runtime/helpers/possibleConstructorReturn",
+              "@babel/runtime/helpers/inherits",
+              "@babel/runtime/helpers/toConsumableArray",
+              "@babel/runtime/helpers/get",
+              "@babel/runtime/regenerator"
+            ]
           },
           "configurations": {
             "production": {

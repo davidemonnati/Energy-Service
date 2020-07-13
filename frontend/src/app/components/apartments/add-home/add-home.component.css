@@ -1,0 +1,15 @@
+.apartment-data {
+    width: 250px;
+}
+
+.description-area {
+    width: 220px;
+}
+
+.error {
+    padding: 16px;
+    width: auto;
+    color: white;
+    background-color: red;
+    word-wrap: break-word;
+  }

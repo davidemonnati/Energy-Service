@@ -21,6 +21,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { GraphComponent } from './components/graph/graph.component';
 import { ApartmentsComponent } from './components/apartments/apartments.component';
@@ -37,6 +39,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from 'src/environments/environment';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { AddHomeComponent } from './components/apartments/add-home/add-home.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     ComparisonComponent,
     GraphscompareComponent,
     HomeComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    AddHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +76,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     FlexLayoutModule,
     MatSelectModule,
     FormsModule,
+    MatDialogModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule
