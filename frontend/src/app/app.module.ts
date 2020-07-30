@@ -40,6 +40,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from 'src/environments/environment';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AddHomeComponent } from './components/apartments/add-home/add-home.component';
+import { DeleteHomeComponent } from './components/apartments/delete-home/delete-home.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AddHomeComponent } from './components/apartments/add-home/add-home.comp
     GraphscompareComponent,
     HomeComponent,
     NotfoundComponent,
-    AddHomeComponent
+    AddHomeComponent,
+    DeleteHomeComponent
   ],
   imports: [
     BrowserModule,

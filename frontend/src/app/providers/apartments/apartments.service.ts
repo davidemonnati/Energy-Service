@@ -20,28 +20,23 @@ export class ApartmentsService {
     return this.httpClient.get<Apartment[]>(this.url);
   }
 
-  createApartment(form: FormGroup): void {
-    this.httpClient.post(environment.BACKEND_ADDR + '/apartments', {
+  createApartment(form: FormGroup): Observable<any> {
+    return this.httpClient.post(environment.BACKEND_ADDR + '/apartments', {
       row: form.value['row'],
       number: form.value['number'],
       description: form.value['description']
     })
-    .subscribe((val) => {
-      console.log('Apartment created successful...', val);
-      return true;
-    })
   }
 
-  createApartmentNew(form: FormGroup): Promise<boolean> {
-    return new Promise(resolve =>{
-      this.httpClient.post(environment.BACKEND_ADDR + '/apartments', {
-        row: form.value['row'],
-        number: form.value['number'],
-        description: form.value['description']
-      })
-      .subscribe((val: any) => {
-        console.log('Apartment created successful...', val);
-      })
+  deleteApartment(row: string, number: string): Promise<boolean> {
+    console.log(row);
+    console.log(number);
+    return new Promise(resolve => {
+      this.httpClient.delete(environment.BACKEND_ADDR + '/apartments/' + row +'/' + number)
+      .subscribe ((val: any) => {
+        console.log('Apartment deleted successful... ' + val)
+      }, err => {
+        resolve(err)})
     })
   }
 }

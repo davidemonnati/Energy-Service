@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Apartment } from 'src/app/models/apartments';
 import { ApartmentsService } from 'src/app/providers/apartments/apartments.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-home',
@@ -30,8 +31,13 @@ export class AddHomeComponent {
 
     createApartment(): void {
       if(!this.errorCheckFields()) {
-        this.apartmentsService.createApartmentNew(this.form);
-        this.showSnackBar();
+        this.apartmentsService.createApartment(this.form).subscribe((val: any) => {
+          this.showSnackBar();
+          console.log('Apartment created successful... ', val);
+        }, (err: HttpErrorResponse) => {
+          this.showErrorSnackBar();
+          console.log('error during creation appartment');
+        })
         this.dialogRef.close();
       }
     }
@@ -45,7 +51,11 @@ export class AddHomeComponent {
       return false;
     }
 
-    showSnackBar() {
+    showSnackBar(): void {
       this.snackBar.open('Appartamento creato!', 'close', {duration: 3000});
+    }
+
+    showErrorSnackBar(): void {
+      this.snackBar.open("Non è stato possibile creare l'appartamento", 'close', { duration: 3000 })
     }
 }

@@ -1,7 +1,8 @@
-import { Entity, Column, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 import {Consumption} from "./consumption.entity";
 
 @Entity("Apartment")
+@Unique(['row', 'number'])
 export class Apartment {
     @PrimaryGeneratedColumn()
     public id: number;

@@ -14,7 +14,10 @@
                   <mat-option *ngFor="let app of apartments" [value]="app.row + '/' + app.number">{{ app.row }} {{ app.number }}</mat-option>  
               </mat-select>
           </mat-form-field>
-          <button mat-button [routerLink]="['/graphcompare', valueFirst, valueSecond ]" routerLinkActive="router-link-active" >Confronta</button>
+          <p class="error" *ngIf="error==true"> {{ errorMessage }} </p>
+          <button mat-button (click)="compare()" routerLinkActive="router-link-active" >Confronta</button>
+          <!-- <button mat-button [routerLink]="['/graphcompare', valueFirst, valueSecond ]" routerLinkActive="router-link-active" >Confronta</button> 
+        
+        Per fare il confronto devi selezionare entrambi gli appartamenti.-->
     </mat-card-content>
 </mat-card>
-
