@@ -13,11 +13,11 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'graph/:row/:number', component: GraphComponent, pathMatch: 'full'},
-  {path: 'graph', component: GraphComponent, canActivate: [AuthGuardService]}, // AAAAAAAAAAAAAAAA
+  {path: 'graph/:row/:number', component: GraphComponent, canActivate: [AuthGuardService], pathMatch: 'full'},
+  {path: 'graph', component: GraphComponent, canActivate: [AuthGuardService]},
   {path: 'apartments', component: ApartmentsComponent, canActivate: [AuthGuardService]},
   {path: 'comparison', component: ComparisonComponent, canActivate: [AuthGuardService]},
-  {path: 'graphcompare/:valuefirst/:valuesecond', component: GraphscompareComponent, pathMatch: 'full'},
+  {path: 'graphcompare/:valuefirst/:valuesecond', component: GraphscompareComponent, canActivate: [AuthGuardService], pathMatch: 'full'},
   {path: 'graphcompare', component: GraphscompareComponent, canActivate: [AuthGuardService]},
   {path: 'login', component: LoginComponent},
   {path: '401', component: UnauthorizedComponent},

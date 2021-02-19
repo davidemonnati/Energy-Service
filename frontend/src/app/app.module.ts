@@ -32,7 +32,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ComparisonComponent } from './components/comparison/comparison.component';
 import { GraphscompareComponent } from './components/graphscompare/graphscompare.component';
 import { HomeComponent } from './components/home/home.component';
-import { AuthService } from './providers/auth/auth.service.ts.service';
+import { AuthService } from './providers/auth/auth.service';
 import { AuthHttpInterceptorProvider } from './providers/auth/AuthHttpInterceptor/auth-http-interceptor';
 
 import { AngularFireModule } from 'angularfire2';

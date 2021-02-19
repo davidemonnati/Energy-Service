@@ -4,7 +4,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -31,6 +30,10 @@ export class AuthService {
 
   signInWithEmailAndPassword(email: string, password: string){
     return this.firebaseAuth.auth.signInWithEmailAndPassword(email, password);
+  }
+
+  getAuthState(): AngularFireAuth {
+    return this.firebaseAuth;
   }
 
   isLoggedIn() {
