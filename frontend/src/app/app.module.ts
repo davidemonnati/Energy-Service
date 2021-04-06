@@ -41,6 +41,7 @@ import { environment } from 'src/environments/environment';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AddHomeComponent } from './components/apartments/add-home/add-home.component';
 import { DeleteHomeComponent } from './components/apartments/delete-home/delete-home.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,13 @@ import { DeleteHomeComponent } from './components/apartments/delete-home/delete-
     MatSnackBarModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [AuthService, AuthHttpInterceptorProvider],
   bootstrap: [AppComponent]
