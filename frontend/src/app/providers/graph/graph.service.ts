@@ -18,7 +18,7 @@ export class GraphService {
     private consumptionService: ConsumptionsService
   ) { }
 
-  createAxisAndSeries(datetime: string, value: string, color: string, seriesName: string) {
+  private createAxisAndSeries(datetime: string, value: string, color: string, seriesName: string) {
     const valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis());
     let series = new am4charts.LineSeries();
     series.name = seriesName;
@@ -31,7 +31,7 @@ export class GraphService {
     series = this.chart.series.push(series);
   }
 
-  createSecondLine(url2: string){
+  private createSecondLine(url2: string){
     console.log(url2);
     this.consumptionService.getConsumption(url2)
     .subscribe( data => {
@@ -87,7 +87,7 @@ export class GraphService {
     return this.chart;
   }
 
-  splitString(url: string): string {
+  private splitString(url: string): string {
     var splittedString = url.split('/');
     var appName = splittedString[4] + '/' + splittedString[5];
     return appName;

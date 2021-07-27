@@ -38,10 +38,9 @@ export class GraphComponent implements OnInit {
 
   getCurrentDate(): string {
     const dateTime = new Date();
-    const today = dateTime.getFullYear() + '/' + dateTime.getMonth() +1 + '/' + dateTime.getDate();
+    const today = dateTime.getFullYear() + '/' + (dateTime.getMonth() +1) + '/' + dateTime.getDate();
     dateTime.setDate(dateTime.getDate()-1);
-
-    return dateTime.getFullYear() + '/' + dateTime.getMonth() +1 + '/' + dateTime.getDate() + '/' + today;
+    return dateTime.getFullYear() + '/' + (dateTime.getMonth() +1) + '/' + dateTime.getDate() + '/' + today;
   }
 
   selectDate(): void {
