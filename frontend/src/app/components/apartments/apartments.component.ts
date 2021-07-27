@@ -3,6 +3,7 @@ import { ApartmentsService } from 'src/app/providers/apartments/apartments.servi
 import { Apartment } from 'src/app/models/apartments';
 import { MatDialog } from '@angular/material/dialog';
 import { AddHomeComponent } from './add-home/add-home.component';
+import { DeleteHomeComponent } from './delete-home/delete-home.component';
 
 @Component({
   selector: 'app-apartments',
@@ -16,6 +17,7 @@ export class ApartmentsComponent implements OnInit {
   private row: string;
   private number: string;
   private description: string;
+  public deleteMode = false;
 
   constructor(
     private apartmentService: ApartmentsService,
@@ -28,14 +30,25 @@ export class ApartmentsComponent implements OnInit {
       this.getApartments() });
   }
 
-  clickOptionsButton() {
+  clickOptionsButton(): void {
     this.openOptions = !this.openOptions;
   }
 
-  openDialog() {
+  openDialog(): void {
     this.openOptions = false;
     this.dialog.open(AddHomeComponent, {
       data: {row: this.row, number: this.number, description: this.description}
+    });
+  }
+
+  openDeleteDialog(row: string, number: string): void {
+    this.row = row;
+    this.number = number;
+    this.dialog.open(DeleteHomeComponent, {
+      data: {
+        row: this.row,
+        number: this.number
+      }
     });
   }
 
@@ -43,5 +56,10 @@ export class ApartmentsComponent implements OnInit {
     this.apartmentService.getApartments().subscribe((data: Apartment[]) => {
       this.apartments = data;
     });
+  }
+
+  changeDeleteMode(): void {
+    this.deleteMode = !this.deleteMode;
+    this.openOptions = false;
   }
 }

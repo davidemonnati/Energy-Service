@@ -24,6 +24,11 @@ export class ApartmentService {
         .then((apartment) => this.apartmentRepository.delete(apartment));
     }
 
+    async deleteByRowNumber(row: string, number: string): Promise<void> {
+        let toDelete = await this.apartmentRepository.getApartment(row, number);
+        await this.apartmentRepository.delete(toDelete);
+    }
+
     async getOneByid(id: number): Promise<Apartment> {
         return await this.apartmentRepository.getOneByid(id);
     }

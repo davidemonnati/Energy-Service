@@ -1,10 +1,13 @@
 <div class="list-apartments">
   <a *ngFor="let app of apartments">
-    <mat-card class="apartments" [routerLink]="['/graph', app.row, app.number]" routerLinkActive="router-link-active">
-      <mat-card-header>
+    <mat-card class="apartments" routerLinkActive="router-link-active">
+      <mat-card-header [routerLink]="['/graph', app.row, app.number]">
         <mat-card-title>{{ app.row }} {{ app.number }}</mat-card-title>
       </mat-card-header>
-      <mat-card-content class="content_apartments">{{ app.description }}</mat-card-content>
+      <mat-card-content [routerLink]="['/graph', app.row, app.number]" class="content_apartments">{{ app.description }}</mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button *ngIf="deleteMode" (click)="openDeleteDialog(app.row, app.number)">Delete</button>
+      </mat-card-actions>
     </mat-card>
   </a>
 </div>
@@ -13,10 +16,18 @@
   <mat-icon aria-hidden="false">{{ openOptions? 'close': 'menu'}}</mat-icon>
 </button>
 
-<button mat-mini-fab color="basic" *ngIf="openOptions" class="action-button one mat-elevation-z8">
-  <mat-icon (click)="openDialog()">home</mat-icon>
+<button mat-mini-fab color="basic" *ngIf="openOptions" class="delete-button one mat-elevation-z8">
+  <mat-icon (click)="changeDeleteMode()">delete</mat-icon>
 </button>
 
 <button mat-raised-button color="basic" *ngIf="openOptions" class="label labelone mat-elevation-z8">
+  <span (click)="changeDeleteMode()">Delete Home</span>
+</button>
+
+<button mat-mini-fab color="basic" *ngIf="openOptions" class="create-button two mat-elevation-z8">
+  <mat-icon (click)="openDialog()">home</mat-icon>
+</button>
+
+<button mat-raised-button color="basic" *ngIf="openOptions" class="label labeltwo mat-elevation-z8">
   <span (click)="openDialog()">Add Home</span>
 </button>

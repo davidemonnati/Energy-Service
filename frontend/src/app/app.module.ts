@@ -32,7 +32,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ComparisonComponent } from './components/comparison/comparison.component';
 import { GraphscompareComponent } from './components/graphscompare/graphscompare.component';
 import { HomeComponent } from './components/home/home.component';
-import { AuthService } from './providers/auth/auth.service.ts.service';
+import { AuthService } from './providers/auth/auth.service';
 import { AuthHttpInterceptorProvider } from './providers/auth/AuthHttpInterceptor/auth-http-interceptor';
 
 import { AngularFireModule } from 'angularfire2';
@@ -40,6 +40,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from 'src/environments/environment';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AddHomeComponent } from './components/apartments/add-home/add-home.component';
+import { DeleteHomeComponent } from './components/apartments/delete-home/delete-home.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { AddHomeComponent } from './components/apartments/add-home/add-home.comp
     GraphscompareComponent,
     HomeComponent,
     NotfoundComponent,
-    AddHomeComponent
+    AddHomeComponent,
+    DeleteHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,13 @@ import { AddHomeComponent } from './components/apartments/add-home/add-home.comp
     MatSnackBarModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [AuthService, AuthHttpInterceptorProvider],
   bootstrap: [AppComponent]

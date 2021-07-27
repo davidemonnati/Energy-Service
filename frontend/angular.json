@@ -21,7 +21,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
@@ -29,27 +30,63 @@
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
+              "@babel/runtime/helpers/possibleConstructorReturn",
+              "@babel/runtime/helpers/slicedToArray",
+              "@babel/runtime/regenerator",
+              "@babel/runtime/helpers/get",
+              "@babel/runtime/helpers/toConsumableArray",
+              "@babel/runtime/helpers/inherits",
+              "css-element-queries/src/ResizeSensor",
+              "core-js/modules/es.map",
+              "core-js/modules/es.array.map",
+              "core-js/modules/es.array.slice",
+              "core-js/modules/es.array.reverse",
+              "core-js/modules/es.regexp.exec",
+              "core-js/modules/es.reflect.get-prototype-of",
+              "core-js/modules/es.reflect.apply",
+              "core-js/modules/es.symbol.iterator",
+              "core-js/modules/es.symbol.description",
+              "core-js/modules/web.dom-collections.iterator",
+              "core-js/modules/es.array.iterator",
+              "core-js/modules/es.reflect.delete-property",
+              "core-js/modules/es.array.fill",
+              "core-js/modules/es.number.constructor",
+              "core-js/modules/es.array.index-of",
+              "core-js/modules/es.string.trim",
+              "core-js/modules/es.string.iterator",
+              "core-js/modules/es.string.includes",
+              "core-js/modules/es.array.some",
+              "core-js/modules/es.array.includes",
+              "core-js/modules/es.array.from",
+              "core-js/modules/es.regexp.to-string",
+              "core-js/modules/es.reflect.construct",
+              "core-js/modules/es.function.name",
+              "core-js/modules/es.string.split",
+              "core-js/modules/es.promise",
+              "core-js/modules/es.array.reduce",
+              "core-js/modules/es.object.to-string",
+              "core-js/modules/es.array.every",
+              "core-js/modules/es.string.split",
+              "core-js/modules/es.array.concat",
+              "core-js/modules/web.dom-collections.for-each",
+              "core-js/modules/es.array.for-each",
+              "core-js/modules/es.object.keys",
+              "core-js/modules/es.object.get-own-property-descriptors",
+              "core-js/modules/es.object.get-own-property-descriptor",
+              "core-js/modules/es.array.filter",
+              "core-js/modules/es.symbol",
+              "core-js/modules/es.string.starts-with",
+              "core-js/modules/es.array.join",
+              "core-js/modules/es.string.replace",
+              "core-js/modules/es.string.match",
+              "@firebase/app",
+              "@firebase/auth",
+              "firebase/app",
               "angularfire2",
               "angularfire2/auth",
-              "@firebase/app",
-              "firebase/app",
-              "css-element-queries/src/ResizeSensor",
               "xlsx",
-              "core-js/modules/es.reflect.delete-property",
-              "core-js/modules/es.object.get-own-property-descriptors",
-              "core-js/modules/es.reflect.construct",
-              "core-js/modules/es.array.includes",
-              "core-js/modules/es.reflect.apply",
-              "core-js/modules/es.array.reverse",
-              "core-js/modules/es.reflect.get-prototype-of",
-              "raf",
-              "@babel/runtime/helpers/slicedToArray",
-              "@babel/runtime/helpers/possibleConstructorReturn",
-              "@babel/runtime/helpers/inherits",
-              "@babel/runtime/helpers/toConsumableArray",
-              "@babel/runtime/helpers/get",
-              "@babel/runtime/regenerator"
-            ]
+              "raf"
+           ]
           },
           "configurations": {
             "production": {
@@ -62,7 +99,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -78,7 +114,9 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
@@ -108,7 +146,8 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",

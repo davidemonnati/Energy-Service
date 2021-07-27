@@ -34,7 +34,13 @@
   to {bottom: 10rem;}
 }
 
-.action-button{
+.create-button{
+  position: fixed;
+  right: 2rem;
+  transition-property: opacity;
+}
+
+.delete-button{
   position: fixed;
   right: 2rem;
   transition-property: opacity;
@@ -73,4 +79,11 @@
   bottom: 10rem;
   animation: moveTwoLabel 0.25s;
 }
-  
+
+.mat-card-header {
+  cursor: pointer;
+}
+
+.mat-card-content{
+  cursor: pointer;
+}
